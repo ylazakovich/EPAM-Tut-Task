@@ -20,7 +20,7 @@ public class PropertyReader {
     private String sqlPassword;
 
 
-    public static PropertyReader getInstance() {
+    protected static PropertyReader getInstance() {
         if (instance == null) {
             synchronized (lock) {
                 instance = new PropertyReader();
