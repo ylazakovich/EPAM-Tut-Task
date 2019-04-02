@@ -38,8 +38,8 @@ public class BrowserFactory {
 
     private static BrowserFactory instance;
     private static WebDriver driver;
-    private static PropertyReader reader = PropertyReader.getInstance();
-    private static DriverManager manager = new DriverManager();
+    private static final PropertyReader reader = PropertyReader.getInstance();
+    private static final DriverManager manager = new DriverManager();
 
 
     private BrowserFactory() throws IOException {
@@ -98,12 +98,11 @@ public class BrowserFactory {
         DesiredCapabilities cap = DesiredCapabilities.chrome();
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.default_content_settings.popups", 0);
+        prefs.put("profile.default_content_setting_values.notifications", 1);
         prefs.put("safebrowsing.enabled", "true");
         prefs.put("download.default_directory", driverPath);
-        ChromeOptions options = new ChromeOptions();
-        options.setAcceptInsecureCerts(true);
-        options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
         cap.setCapability("prefs", prefs);
+        ChromeOptions options = new ChromeOptions();
         return options.merge(cap);
     }
 
