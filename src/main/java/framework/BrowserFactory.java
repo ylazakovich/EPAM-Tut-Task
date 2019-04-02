@@ -1,6 +1,5 @@
 package framework;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,7 +8,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -17,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Map;
 
 public class BrowserFactory {
     private static final String CHROME = "chrome";
@@ -24,7 +23,6 @@ public class BrowserFactory {
     private static final String IE = "internet explorer";
 
     private String operatingSystemName = System.getProperty("os.name");
-    private static final String WINDOWS = "windows";
     private static final String LINUX = "linux";
 
     private static final String PROPERTY_CHROME = "webdriver.chrome.driver";
@@ -36,15 +34,17 @@ public class BrowserFactory {
     private static final String DRIVER_IE = "IEDriverServer";
     private static String driverPath = "src/main/resources/";
 
-    private static WebDriver driver;
     private static BrowserFactory instance;
+    private static WebDriver driver;
     private static PropertyReader reader = PropertyReader.getInstance();
+    private static DriverManager manager = new DriverManager();
+
 
     private BrowserFactory() throws IOException {
         driverPath = new File(driverPath).getCanonicalPath();
-        getBrowser(reader.getBrowserName());
-//        maximize();
-        driver.get(reader.getUrl());
+        initBrowser(reader.getBrowserName());
+        manager.maximize(driver);
+        manager.openUrl(driver, reader.getUrl());
     }
 
     public static BrowserFactory getInstance() {
@@ -61,12 +61,12 @@ public class BrowserFactory {
         return instance;
     }
 
-    private void getBrowser(String browserName) {
+    private void initBrowser(String browserName) {
         System.out.println("Current Browser Selection: " + browserName);
         switch (browserName.toLowerCase()) {
             case CHROME:
                 SetPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
-                driver = new ChromeDriver();
+                driver = new ChromeDriver(capabilityForChrome());
                 break;
             case FIREFOX:
                 SetPropertyBrowser(PROPERTY_FIREFOX, DRIVER_FIREFOX);
@@ -92,41 +92,13 @@ public class BrowserFactory {
         System.setProperty(prop, Paths.get(driverPath, driverName.concat(initOS(operatingSystemName))).toString());
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void initUrl(WebDriver driver) {
-        driver.get(reader.getUrl());
-    }
-
-    public static void maximize() {
-        driver.manage().window().maximize();
-    }
-
-    public static void refresh() {
-        driver.navigate().refresh();
-    }
-
-    public static void close() {
-        driver.quit();
-    }
-
-
-    private DesiredCapabilities capabilityForChrome() {
-        HashMap<String, Object> chromePrefs = new HashMap<>();
-        chromePrefs.put("profile.default_content_settings.popups", 0);
-        chromePrefs.put("download.default_directory", driverPath);
-        chromePrefs.put("safebrowsing.enabled", "true");
-
-        ChromeOptions options = new ChromeOptions();
-        options.setExperimentalOption("prefs", chromePrefs);
-
+    private ChromeOptions capabilityForChrome() {
         DesiredCapabilities cap = DesiredCapabilities.chrome();
-        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-
-        return cap;
-
+        Map<String, Object> prefs = new HashMap<String, Object>();
+        prefs.put("profile.default_content_settings.popups", 0);
+        cap.setCapability("prefs", prefs);
+        ChromeOptions options = new ChromeOptions();
+        return options.merge(cap);
     }
 
     private InternetExplorerOptions capabilityForIE() {
@@ -151,5 +123,11 @@ public class BrowserFactory {
         return option.setProfile(prof);
     }
 
+    public WebDriver getDriver() {
+        return driver;
+    }
 
+    public DriverManager getManager() {
+        return manager;
+    }
 }
