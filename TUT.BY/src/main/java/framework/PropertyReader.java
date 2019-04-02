@@ -1,5 +1,6 @@
 package framework;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -33,8 +34,11 @@ public class PropertyReader {
         Properties properties = new Properties();
         try {
             properties.load(path);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Configuration properties file cannot be found");
         } catch (IOException e) {
-            System.err.println("Configuration properties file cannot be found");
+            System.err.println("Bad canonical path");
         }
 
         url = properties.getProperty("url");
