@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="AllTest" verbose="5" data-provider-thread-count="1">
+    <test name="Case with accounts">
+        <parameter name="username" value="rotf10corp@tut.by"/>
+        <parameter name="password" value="qq3858122"/>
+        <packages>
+            <package name="TUTTest">
+            </package>
+        </packages>
+    </test>
+</suite>
