@@ -1,5 +1,6 @@
 package framework;
 
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,6 +9,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -96,8 +98,12 @@ public class BrowserFactory {
         DesiredCapabilities cap = DesiredCapabilities.chrome();
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.default_content_settings.popups", 0);
-        cap.setCapability("prefs", prefs);
+        prefs.put("safebrowsing.enabled", "true");
+        prefs.put("download.default_directory", driverPath);
         ChromeOptions options = new ChromeOptions();
+        options.setAcceptInsecureCerts(true);
+        options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+        cap.setCapability("prefs", prefs);
         return options.merge(cap);
     }
 
