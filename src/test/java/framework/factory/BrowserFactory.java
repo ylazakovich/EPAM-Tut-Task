@@ -35,11 +35,10 @@ public class BrowserFactory {
 
     private static BrowserFactory instance;
     private static WebDriver driver;
-    private static final PropertyReader reader = PropertyReader.getInstance();
     private final DriverManager manager = new DriverManager();
 
-    private static final String browserName = reader.getProperty("browserName");
-    private static final String url = reader.getProperty("url");
+    private static final String browserName = PropertyReader.getProperty("browserName");
+    private static final String url = PropertyReader.getProperty("url");
 
 
     private BrowserFactory() throws IOException {

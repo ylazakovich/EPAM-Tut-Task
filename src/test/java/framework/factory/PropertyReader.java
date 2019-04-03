@@ -11,7 +11,7 @@ public class PropertyReader {
     private static final Object lock = new Object();
     private static PropertyReader instance;
 
-    private Properties properties;
+    private static Properties properties;
 
     protected static PropertyReader getInstance() {
         if (instance == null) {
@@ -35,7 +35,8 @@ public class PropertyReader {
         }
     }
 
-    public String getProperty(String property) {
+    public static String getProperty(String property) {
+        getInstance();
         return properties.getProperty(property);
     }
 }
