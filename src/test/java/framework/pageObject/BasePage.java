@@ -1,11 +1,12 @@
 package framework.pageObject;
 
+import framework.elements.Button;
 import org.openqa.selenium.By;
 
 
-public class BasePage {
+public abstract class BasePage {
     private By locator;
-//    private Button button;
+    private Button button;
 
 
     private BasePage(By locator) {
@@ -14,9 +15,8 @@ public class BasePage {
     }
 
     private boolean isOpen(By titleLocator) {
-//        this.button = new Button(titleLocator);
-//        return button.isEnable();
-        return false;
+        this.button = new Button(titleLocator);
+        return button.isEnable();
     }
 
     private void init(By pageLocator) {
