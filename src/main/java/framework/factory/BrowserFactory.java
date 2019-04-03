@@ -24,7 +24,7 @@ public class BrowserFactory {
     private static final String DRIVER_CHROME = "chromedriver";
     private static final String DRIVER_FIREFOX = "geckodriver";
     private static final String DRIVER_IE = "IEDriverServer";
-    private static String driverPath = "src/test/resources/";
+    private static String driverPath = "src/main/resources/";
 
     private static BrowserFactory instance;
     private static WebDriver driver;

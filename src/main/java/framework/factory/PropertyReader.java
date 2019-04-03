@@ -28,8 +28,7 @@ public class PropertyReader {
         try {
             properties.load(path);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Configuration properties file cannot be found" + path);
+            System.err.println("Configuration properties file cannot be found" + path);
         } catch (IOException e) {
             System.err.println("Bad canonical path");
         }
