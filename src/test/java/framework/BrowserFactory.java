@@ -11,7 +11,6 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -32,7 +31,7 @@ public class BrowserFactory {
     private static final String DRIVER_CHROME = "chromedriver";
     private static final String DRIVER_FIREFOX = "geckodriver";
     private static final String DRIVER_IE = "IEDriverServer";
-    private static String driverPath = "src/main/resources/";
+    private static String driverPath = "src/test/resources/";
 
     private static BrowserFactory instance;
     private static WebDriver driver;
@@ -52,11 +51,10 @@ public class BrowserFactory {
             if (instance == null) {
                 instance = new BrowserFactory();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Driver cannot be found");
+        } catch (IllegalStateException e) {
+            System.err.println("The driver executable does not exist at " + driverPath);
         } catch (IOException ex) {
-            System.out.println("Could not open browser");
+            System.err.println("Could not open browser");
         }
         return instance;
     }
