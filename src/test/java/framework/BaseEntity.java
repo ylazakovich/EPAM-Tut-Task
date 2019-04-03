@@ -1,5 +1,5 @@
-import framework.BrowserFactory;
-import framework.DriverManager;
+package framework;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 
 public class BaseEntity {
     private final BrowserFactory factory = BrowserFactory.getInstance();
+
     private DriverManager manager;
     private WebDriver driver;
 
