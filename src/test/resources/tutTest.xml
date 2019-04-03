@@ -5,7 +5,7 @@
         <parameter name="username" value="rotf10corp@tut.by"/>
         <parameter name="password" value="qq3858122"/>
         <packages>
-            <package name="test.TUTTest.*">
+            <package name="TUTTest.*">
             </package>
         </packages>
     </test>

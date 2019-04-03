@@ -60,7 +60,7 @@
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>
-                            src/main/resources/${suiteXmlFile}
+                            src/test/resources/${suiteXmlFile}
                         </suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>

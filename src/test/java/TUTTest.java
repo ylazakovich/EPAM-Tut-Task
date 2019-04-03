@@ -1,5 +1,3 @@
-package test;
-
 import framework.BaseEntity;
 import org.testng.annotations.Test;
 

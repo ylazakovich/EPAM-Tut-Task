@@ -1,5 +1,3 @@
-package test;
-
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
 

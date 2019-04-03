@@ -66,7 +66,6 @@ public class BrowserFactory {
         System.setProperty(prop, Paths.get(driverPath, driverName.concat(initOS(operatingSystemName))).toString());
     }
 
-
     public WebDriver getDriver() {
         return driver;
     }
