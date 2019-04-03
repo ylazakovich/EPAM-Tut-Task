@@ -2,6 +2,7 @@ package framework.pageObject;
 
 import framework.elements.Button;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
 
 public abstract class BasePage {
@@ -11,7 +12,7 @@ public abstract class BasePage {
 
     public BasePage(By locator) {
         init(locator);
-        isOpen(locator);
+        Assert.assertEquals(isOpen(locator), true);
     }
 
     public boolean isOpen(By titleLocator) {
