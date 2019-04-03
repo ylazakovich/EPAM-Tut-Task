@@ -11,13 +11,13 @@ public class PropertyReader {
     private static final Object lock = new Object();
     private static PropertyReader instance;
 
-    private static String url;
-    private static String browserName;
-    private static long shortTimeOut;
-    private static long longTimeOut;
-    private static String host;
-    private static String sqlLogin;
-    private static String sqlPassword;
+    private String url;
+    private String browserName;
+    private long shortTimeOut;
+    private long longTimeOut;
+    private String host;
+    private String sqlLogin;
+    private String sqlPassword;
 
 
     protected static PropertyReader getInstance() {

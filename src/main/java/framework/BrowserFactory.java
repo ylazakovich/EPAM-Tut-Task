@@ -1,6 +1,5 @@
 package framework;
 
-import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,7 +8,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -24,7 +22,7 @@ public class BrowserFactory {
     private static final String FIREFOX = "firefox";
     private static final String IE = "internet explorer";
 
-    private String operatingSystemName = System.getProperty("os.name");
+    private static final String operatingSystemName = System.getProperty("os.name");
     private static final String LINUX = "linux";
 
     private static final String PROPERTY_CHROME = "webdriver.chrome.driver";
@@ -38,8 +36,8 @@ public class BrowserFactory {
 
     private static BrowserFactory instance;
     private static WebDriver driver;
-    private static final PropertyReader reader = PropertyReader.getInstance();
-    private static final DriverManager manager = new DriverManager();
+    private final PropertyReader reader = PropertyReader.getInstance();
+    private final DriverManager manager = new DriverManager();
 
 
     private BrowserFactory() throws IOException {

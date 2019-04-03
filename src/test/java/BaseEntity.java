@@ -7,8 +7,8 @@ import org.testng.annotations.BeforeClass;
 
 public class BaseEntity {
     private final BrowserFactory factory = BrowserFactory.getInstance();
-    private WebDriver driver;
     private DriverManager manager;
+    private WebDriver driver;
 
     @BeforeClass
     public void before() {
