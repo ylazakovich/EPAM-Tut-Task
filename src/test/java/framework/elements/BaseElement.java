@@ -17,9 +17,6 @@ public abstract class BaseElement extends BaseEntity {
     private Actions actions;
     private WebDriver driver = factory.getDriver();
 
-    public BaseElement() {
-    }
-
     public BaseElement(By by) {
         this.by = by;
     }

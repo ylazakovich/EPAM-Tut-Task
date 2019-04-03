@@ -9,9 +9,6 @@ import java.util.List;
 public class Label extends BaseElement {
     private List<String> labelList;
 
-    public Label() {
-    }
-
     public Label(By by) {
         super(by);
     }
