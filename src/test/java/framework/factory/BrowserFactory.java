@@ -1,4 +1,4 @@
-package framework;
+package framework.factory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,14 +35,17 @@ public class BrowserFactory {
 
     private static BrowserFactory instance;
     private static WebDriver driver;
-    private final PropertyReader reader = PropertyReader.getInstance();
+    private static final PropertyReader reader = PropertyReader.getInstance();
     private final DriverManager manager = new DriverManager();
+
+    private static final String browserName = reader.getProperty("browserName");
+    private static final String url = reader.getProperty("url");
 
 
     private BrowserFactory() throws IOException {
         driverPath = new File(driverPath).getCanonicalPath();
-        initBrowser(reader.getBrowserName());
-        manager.openUrl(driver, reader.getUrl());
+        initBrowser(browserName);
+        manager.openUrl(driver, url);
     }
 
     public static BrowserFactory getInstance() {
