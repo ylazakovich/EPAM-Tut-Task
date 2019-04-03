@@ -2,19 +2,12 @@ package framework.factory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 public class BrowserFactory {
     private static final String CHROME = "chrome";
@@ -60,26 +53,8 @@ public class BrowserFactory {
         return instance;
     }
 
-    private void initBrowser(String browserName) {
-        System.out.println("Current Browser Selection: " + browserName);
-        switch (browserName.toLowerCase()) {
-            case CHROME:
-                SetPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
-                driver = new ChromeDriver(capabilityForChrome());
-                break;
-            case FIREFOX:
-                SetPropertyBrowser(PROPERTY_FIREFOX, DRIVER_FIREFOX);
-                driver = new FirefoxDriver(capabilityForFirefox());
-                break;
-            case IE:
-                SetPropertyBrowser(PROPERTY_IE, DRIVER_IE);
-                driver = new InternetExplorerDriver(capabilityForIE());
-                break;
-            default:
-                SetPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
-                driver = new ChromeDriver();
-
-        }
+    protected static String getDriverPath() {
+        return driverPath;
     }
 
     private static String initOS(String operatingSystemName) {
@@ -91,39 +66,6 @@ public class BrowserFactory {
         System.setProperty(prop, Paths.get(driverPath, driverName.concat(initOS(operatingSystemName))).toString());
     }
 
-    private ChromeOptions capabilityForChrome() {
-        DesiredCapabilities cap = DesiredCapabilities.chrome();
-        Map<String, Object> prefs = new HashMap<String, Object>();
-        prefs.put("profile.default_content_settings.popups", 0);
-        prefs.put("profile.default_content_setting_values.notifications", 1);
-        prefs.put("safebrowsing.enabled", "true");
-        prefs.put("download.default_directory", driverPath);
-        cap.setCapability("prefs", prefs);
-        ChromeOptions options = new ChromeOptions();
-        return options.merge(cap);
-    }
-
-    private InternetExplorerOptions capabilityForIE() {
-        DesiredCapabilities cap = DesiredCapabilities.internetExplorer();
-        cap.setCapability("nativeEvents", false);
-        cap.setCapability("unexpectedAlertBehaviour", "accept");
-        cap.setCapability("ignoreProtectedModeSettings", true);
-        cap.setCapability("disable-popup-blocking", true);
-        cap.setCapability("enablePersistentHover", true);
-        cap.setCapability("ignoreZoomSetting", true);
-        cap.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-        InternetExplorerOptions options = new InternetExplorerOptions();
-        return options.merge(cap);
-    }
-
-    private FirefoxOptions capabilityForFirefox() {
-        FirefoxProfile prof = new FirefoxProfile();
-        prof.setPreference("ignoreProtectedModeSettings", false);
-        prof.setPreference("browser.download.folderList", 2);
-        prof.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/x-debian-package, application/octet-stream");
-        FirefoxOptions option = new FirefoxOptions();
-        return option.setProfile(prof);
-    }
 
     public WebDriver getDriver() {
         return driver;
@@ -133,4 +75,25 @@ public class BrowserFactory {
         return manager;
     }
 
+    private void initBrowser(String browserName) {
+        System.out.println("Current Browser Selection: " + browserName);
+        switch (browserName.toLowerCase()) {
+            case CHROME:
+                SetPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
+                driver = new ChromeDriver(CapabilityGenerator.capabilityForChrome());
+                break;
+            case FIREFOX:
+                SetPropertyBrowser(PROPERTY_FIREFOX, DRIVER_FIREFOX);
+                driver = new FirefoxDriver(CapabilityGenerator.capabilityForFirefox());
+                break;
+            case IE:
+                SetPropertyBrowser(PROPERTY_IE, DRIVER_IE);
+                driver = new InternetExplorerDriver(CapabilityGenerator.capabilityForIE());
+                break;
+            default:
+                SetPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
+                driver = new ChromeDriver();
+
+        }
+    }
 }

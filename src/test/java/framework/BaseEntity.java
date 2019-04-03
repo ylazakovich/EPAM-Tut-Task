@@ -1,4 +1,4 @@
-package test;
+package framework;
 
 import framework.factory.BrowserFactory;
 import framework.factory.DriverManager;
