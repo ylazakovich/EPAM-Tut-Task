@@ -9,17 +9,17 @@ public abstract class BasePage {
     private Button button;
 
 
-    private BasePage(By locator) {
+    public BasePage(By locator) {
         init(locator);
         isOpen(locator);
     }
 
-    private boolean isOpen(By titleLocator) {
+    public boolean isOpen(By titleLocator) {
         this.button = new Button(titleLocator);
         return button.isEnable();
     }
 
-    private void init(By pageLocator) {
+    public void init(By pageLocator) {
         this.locator = pageLocator;
     }
 }

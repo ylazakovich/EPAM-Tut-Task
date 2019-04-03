@@ -43,7 +43,6 @@ public class BrowserFactory {
         driverPath = new File(driverPath).getCanonicalPath();
         initBrowser(reader.getBrowserName());
         manager.maximize(driver);
-        manager.openUrl(driver, reader.getUrl());
     }
 
     public static BrowserFactory getInstance() {
@@ -130,5 +129,9 @@ public class BrowserFactory {
 
     public DriverManager getManager() {
         return manager;
+    }
+
+    public PropertyReader getReader() {
+        return reader;
     }
 }

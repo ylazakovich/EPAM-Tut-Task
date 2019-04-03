@@ -8,13 +8,13 @@ import org.testng.annotations.BeforeClass;
 public class BaseEntity {
     private final BrowserFactory factory = BrowserFactory.getInstance();
 
-    private DriverManager manager;
-    private WebDriver driver;
+    private PropertyReader reader = factory.getReader();
+    private DriverManager manager = factory.getManager();
+    private WebDriver driver = factory.getDriver();
 
     @BeforeClass
     public void before() {
-        driver = factory.getDriver();
-        manager = factory.getManager();
+        manager.openUrl(driver, reader.getUrl());
     }
 
     @AfterClass
