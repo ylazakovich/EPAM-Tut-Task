@@ -1,4 +1,4 @@
-package framework.pageObject;
+package pageObject;
 
 import framework.elements.Button;
 import org.openqa.selenium.By;

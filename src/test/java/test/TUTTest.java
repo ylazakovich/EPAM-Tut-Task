@@ -1,6 +1,5 @@
 package test;
 
-import framework.pageObject.MainPage;
 import org.testng.annotations.Test;
 
 public class TUTTest extends BaseEntity {
