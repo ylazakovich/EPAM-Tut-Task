@@ -1,11 +1,11 @@
 package framework.elements;
 
-import framework.BaseEntity;
 import framework.factory.BrowserFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import test.BaseEntity;
 
 import java.util.List;
 

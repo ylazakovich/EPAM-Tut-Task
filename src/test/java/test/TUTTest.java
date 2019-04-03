@@ -1,6 +1,5 @@
 package test;
 
-import framework.BaseEntity;
 import framework.pageObject.MainPage;
 import org.testng.annotations.Test;
 

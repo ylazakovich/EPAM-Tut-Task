@@ -1,4 +1,4 @@
-package framework;
+package test;
 
 import framework.factory.BrowserFactory;
 import framework.factory.DriverManager;
@@ -20,8 +20,6 @@ public class BaseEntity {
 
     @AfterClass
     public void after() {
-        if (driver != null) {
-            manager.close(driver);
-        }
+        manager.close(driver);
     }
 }
