@@ -20,10 +20,6 @@ public abstract class BaseElement extends BaseEntity {
     public BaseElement() {
     }
 
-    public BaseElement(WebElement element) {
-        this.element = element;
-    }
-
     public BaseElement(By by) {
         this.by = by;
     }

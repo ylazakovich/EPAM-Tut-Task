@@ -42,7 +42,7 @@ public class BrowserFactory {
     private BrowserFactory() throws IOException {
         driverPath = new File(driverPath).getCanonicalPath();
         initBrowser(reader.getBrowserName());
-        manager.maximize(driver);
+        manager.openUrl(driver, reader.getUrl());
     }
 
     public static BrowserFactory getInstance() {
@@ -131,7 +131,4 @@ public class BrowserFactory {
         return manager;
     }
 
-    public PropertyReader getReader() {
-        return reader;
-    }
 }
