@@ -28,7 +28,7 @@ public class BrowserFactory {
 
     private static BrowserFactory instance;
     private static WebDriver driver;
-    private final DriverManager manager = new DriverManager();
+    private final WebDriverManager manager = new WebDriverManager();
 
     private static final String browserName = PropertyReader.getProperty("browserName");
     private static final String url = PropertyReader.getProperty("url");
@@ -70,7 +70,7 @@ public class BrowserFactory {
         return driver;
     }
 
-    public DriverManager getManager() {
+    public WebDriverManager getManager() {
         return manager;
     }
 

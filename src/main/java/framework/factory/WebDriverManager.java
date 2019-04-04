@@ -2,7 +2,7 @@ package framework.factory;
 
 import org.openqa.selenium.WebDriver;
 
-public class DriverManager {
+public class WebDriverManager {
 
     public void openUrl(WebDriver driver, String url) {
         driver.get(url);
