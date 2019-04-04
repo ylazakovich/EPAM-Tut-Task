@@ -1,14 +1,9 @@
-import framework.factory.BrowserFactory;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class MainPage extends BasePage {
-    private final BrowserFactory factory = BrowserFactory.getInstance();
-    private WebDriver driver = factory.getDriver();
-
     @FindBy(xpath = "//a[@class='enter']")
     private WebElement loginButton;
     @FindBy(xpath = "//div[@class='i-holder']/input[@name='login']")
