@@ -1,43 +1,13 @@
 package framework.sql;
 
-import framework.factory.PropertyReader;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class SqlManager {
-    private static final String DB_URL = PropertyReader.getProperty("db.url");
-    private static final String USER = PropertyReader.getProperty("db.login");
-    private static final String PASS = PropertyReader.getProperty("db.password");
-    private static Connection connection;
+    private static final Connection connection = SqlUtil.setConnect();
     private static ResultSet rs;
-
-    private static void initPostgreSQLDriver() {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
-        }
-        System.out.println("PostgreSQL JDBC Driver successfully connected");
-    }
-
-    private static void setConnect() {
-        try {
-            connection = DriverManager
-                    .getConnection(DB_URL, USER, PASS);
-
-        } catch (SQLException e) {
-            System.out.println("Connection Failed");
-        }
-        isConnect();
-    }
-
-    private static void isConnect() {
-        if (connection != null) {
-            System.out.println("You successfully connected to database now");
-        } else {
-            System.out.println("Failed to make connection to database");
-        }
-    }
 
     private static Connection getConnection() {
         return connection;
@@ -67,8 +37,6 @@ public class SqlManager {
 
 
     public static void main(String[] args) {
-        initPostgreSQLDriver();
-        setConnect();
         getUserEmail(1);
     }
 
