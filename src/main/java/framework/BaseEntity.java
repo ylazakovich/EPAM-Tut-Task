@@ -3,7 +3,6 @@ package framework;
 import framework.factory.BrowserFactory;
 import framework.factory.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 
@@ -18,8 +17,8 @@ public class BaseEntity {
         manager.maximize(driver);
     }
 
-    @AfterClass
-    public void after() {
-        manager.close(driver);
-    }
+//    @AfterClass
+//    public void after() {
+//        manager.close(driver);
+//    }
 }
