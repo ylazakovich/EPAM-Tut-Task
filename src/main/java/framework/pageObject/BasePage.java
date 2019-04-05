@@ -19,7 +19,7 @@ public abstract class BasePage {
     public BasePage(By locator) {
         PageFactory.initElements(driver, this);
         init(locator);
-        Assert.assertEquals(isOpen(locator), true);
+        Assert.assertEquals(true, isOpen(locator));
     }
 
     public boolean isOpen(By titleLocator) {
