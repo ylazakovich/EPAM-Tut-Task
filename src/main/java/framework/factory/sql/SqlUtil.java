@@ -1,4 +1,4 @@
-package framework.sql;
+package framework.factory.sql;
 
 import framework.factory.PropertyReader;
 
