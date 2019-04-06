@@ -19,9 +19,9 @@ public class TUTTest extends BaseEntity {
 
 
     @Test(dataProvider = "getUser")
-    public void run(User user1, User user2) {
+    public void run(User acc1, User acc2) {
         MainPage mainPage = new MainPage();
-        mainPage.authorization(user1.getUserName(), user1.getPassword());
+        mainPage.authorization(acc1.getUserName(), acc1.getPassword());
         LoginPage loginPage = new LoginPage();
         loginPage.logOut();
 
