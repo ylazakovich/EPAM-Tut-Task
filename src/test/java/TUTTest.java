@@ -1,5 +1,5 @@
 import framework.BaseEntity;
-import framework.User;
+import framework.factory.users.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.LoginPage;
@@ -11,8 +11,8 @@ public class TUTTest extends BaseEntity {
     public Object[][] getUser() {
         return new Object[][]{
                 {
-                        new User("rotf10corp@tut.by", "qq3858122"),
-                        new User("rotf20corp@tut.by", "qq3858122")
+                        new User(),
+                        new User()
                 }
         };
     }

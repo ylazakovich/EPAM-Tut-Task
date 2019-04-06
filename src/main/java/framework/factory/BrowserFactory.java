@@ -1,6 +1,5 @@
 package framework.factory;
 
-import framework.factory.sql.SqlManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -30,7 +29,6 @@ public class BrowserFactory {
     private static BrowserFactory instance;
     private static WebDriver driver;
     private final WebDriverManager webDriverManager = new WebDriverManager();
-    private final SqlManager sqlManager = new SqlManager();
 
     private static final String browserName = PropertyReader.getProperty("browserName");
     private static final String url = PropertyReader.getProperty("url");
@@ -74,10 +72,6 @@ public class BrowserFactory {
 
     public WebDriverManager getWebDriverManager() {
         return webDriverManager;
-    }
-
-    public SqlManager getSqlManager() {
-        return sqlManager;
     }
 
     private void initBrowser(String browserName) {

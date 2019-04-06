@@ -7,27 +7,38 @@ import java.sql.SQLException;
 
 public class SqlManager {
     private static ResultSet rs;
+    private static String email;
+    private static String password;
 
-    private static String rsResult(ResultSet rs, String columnName) throws SQLException {
-        String result = null;
+    private static void rsResult(ResultSet rs) throws SQLException {
         while (rs.next()) {
-            result = rs.getString(columnName);
+            email = rs.getString("email");
+            password = rs.getString("password");
         }
-        rs.close();
-        return result;
     }
 
-    private void valueOfColumn(int userId, String columnName) {
-        String SQL = "SELECT " + columnName
-                + " FROM users "
+    public static void selectLine(int userId) {
+        String SQL = "SELECT email, password" +
+                " FROM users "
                 + "WHERE id = " + String.valueOf(userId) + ";";
-        try (Connection conn = SqlUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+        try {
+            Connection conn = SqlUtil.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(SQL);
             rs = pstmt.executeQuery();
-            System.out.println(rsResult(rs, columnName));
+            rsResult(rs);
+            rs.close();
+            pstmt.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+
     }
 
+    public static String getEmail() {
+        return email;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
 }

@@ -43,7 +43,7 @@ public class SqlUtil extends SqlManager {
         return connection;
     }
 
-    protected static void downConnect() throws SQLException {
+    public static void downConnect() throws SQLException {
         if (connection != null) {
             connection.close();
         }
