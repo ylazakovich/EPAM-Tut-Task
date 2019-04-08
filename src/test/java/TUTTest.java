@@ -7,8 +7,8 @@ import pages.MainPage;
 
 public class TUTTest extends BaseEntity {
 
-    @DataProvider(name = "getUser")
-    public Object[][] getUser() {
+    @DataProvider(name = "getUsers")
+    public Object[][] getUsers() {
         return new Object[][]{
                 {
                         new User(),
@@ -18,7 +18,7 @@ public class TUTTest extends BaseEntity {
     }
 
 
-    @Test(dataProvider = "getUser")
+    @Test(dataProvider = "getUsers")
     public void run(User acc1, User acc2) {
         MainPage mainPage = new MainPage();
         mainPage.authorization(acc1.getUserName(), acc1.getPassword());
