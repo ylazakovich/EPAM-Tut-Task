@@ -1,7 +1,6 @@
-package framework.factory.users;
+package framework.dataFactory;
 
 public class User {
-    private static int count = 1;
     private String userName;
     private String password;
 

@@ -1,4 +1,4 @@
-package framework.factory;
+package framework;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class PropertyReader {
 
     private static Properties properties;
 
-    protected static PropertyReader getInstance() {
+    public static PropertyReader getInstance() {
         if (instance == null) {
             synchronized (lock) {
                 instance = new PropertyReader();

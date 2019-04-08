@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class CapabilityGenerator {
 
-    public static ChromeOptions capabilityForChrome() {
+    protected static ChromeOptions getChromeCapability() {
         DesiredCapabilities cap = DesiredCapabilities.chrome();
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.default_content_settings.popups", 0);
@@ -24,7 +24,7 @@ public class CapabilityGenerator {
         return options.merge(cap);
     }
 
-    public static InternetExplorerOptions capabilityForIE() {
+    protected static InternetExplorerOptions getIECapability() {
         DesiredCapabilities cap = DesiredCapabilities.internetExplorer();
         cap.setCapability("nativeEvents", false);
         cap.setCapability("unexpectedAlertBehaviour", "accept");
@@ -37,7 +37,7 @@ public class CapabilityGenerator {
         return options.merge(cap);
     }
 
-    public static FirefoxOptions capabilityForFirefox() {
+    protected static FirefoxOptions getFirefoxCapability() {
         FirefoxProfile prof = new FirefoxProfile();
         prof.setPreference("ignoreProtectedModeSettings", false);
         prof.setPreference("browser.download.folderList", 2);
@@ -45,4 +45,5 @@ public class CapabilityGenerator {
         FirefoxOptions option = new FirefoxOptions();
         return option.setProfile(prof);
     }
+
 }

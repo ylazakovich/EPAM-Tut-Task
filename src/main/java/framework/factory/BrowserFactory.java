@@ -1,6 +1,6 @@
 package framework.factory;
 
-import framework.factory.users.User;
+import framework.PropertyReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -9,7 +9,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.List;
 
 public class BrowserFactory {
     private static final String CHROME = "chrome";
@@ -30,8 +29,6 @@ public class BrowserFactory {
 
     private static BrowserFactory instance;
     private static WebDriver driver;
-
-    private final static List<User> userList = DataStash.getUserList();
 
     private final WebDriverManager webDriverManager = new WebDriverManager();
 
@@ -84,15 +81,15 @@ public class BrowserFactory {
         switch (browserName.toLowerCase()) {
             case CHROME:
                 SetPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
-                driver = new ChromeDriver(CapabilityGenerator.capabilityForChrome());
+                driver = new ChromeDriver(CapabilityGenerator.getChromeCapability());
                 break;
             case FIREFOX:
                 SetPropertyBrowser(PROPERTY_FIREFOX, DRIVER_FIREFOX);
-                driver = new FirefoxDriver(CapabilityGenerator.capabilityForFirefox());
+                driver = new FirefoxDriver(CapabilityGenerator.getFirefoxCapability());
                 break;
             case IE:
                 SetPropertyBrowser(PROPERTY_IE, DRIVER_IE);
-                driver = new InternetExplorerDriver(CapabilityGenerator.capabilityForIE());
+                driver = new InternetExplorerDriver(CapabilityGenerator.getIECapability());
                 break;
             default:
                 SetPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
@@ -101,7 +98,4 @@ public class BrowserFactory {
         }
     }
 
-    public static List<User> getUserList() {
-        return userList;
-    }
 }

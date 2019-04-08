@@ -1,7 +1,7 @@
-package framework.factory;
+package framework.dataFactory;
 
-import framework.factory.sql.SqlManager;
-import framework.factory.users.User;
+import framework.PropertyReader;
+import framework.dataFactory.sql.SqlManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -15,13 +15,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataStash {
+public class DataFactory {
     private static final String DATA_TYPE = PropertyReader.getProperty("dataType");
     private static final String DATA_PATH = "src/main/resources/";
-
-    private static final String XML = "xml";
-    private static final String SQL = "sql";
-    private static final String CSV = "csv";
 
     private static final List<User> users = new ArrayList<>();
 
@@ -30,13 +26,13 @@ public class DataStash {
 
     protected static List<User> getUserList() {
         switch (DATA_TYPE.toLowerCase()) {
-            case SQL:
+            case "sql":
                 getUserListBySQL();
                 break;
-            case XML:
+            case "xml":
                 getUserListByXML();
                 break;
-            case CSV:
+            case "csv":
                 getUserListByCSV();
                 break;
         }

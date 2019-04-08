@@ -1,6 +1,6 @@
 package pages;
 
-import framework.factory.users.User;
+import framework.dataFactory.User;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
