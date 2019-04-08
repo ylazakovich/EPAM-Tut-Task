@@ -1,5 +1,6 @@
 package framework.factory;
 
+import framework.factory.users.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -8,6 +9,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class BrowserFactory {
     private static final String CHROME = "chrome";
@@ -28,6 +30,9 @@ public class BrowserFactory {
 
     private static BrowserFactory instance;
     private static WebDriver driver;
+
+    private final static List<User> userList = DataStash.getUserList();
+
     private final WebDriverManager webDriverManager = new WebDriverManager();
 
     private static final String browserName = PropertyReader.getProperty("browserName");
@@ -94,5 +99,9 @@ public class BrowserFactory {
                 driver = new ChromeDriver();
 
         }
+    }
+
+    public static List<User> getUserList() {
+        return userList;
     }
 }

@@ -28,7 +28,7 @@ public class DataStash {
     private static String userName;
     private static String password;
 
-    private static List<User> getUserList() {
+    protected static List<User> getUserList() {
         switch (DATA_TYPE.toLowerCase()) {
             case SQL:
                 getUserListBySQL();
