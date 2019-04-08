@@ -1,5 +1,6 @@
 package pages;
 
+import framework.factory.users.User;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -27,12 +28,12 @@ public class MainPage extends BasePage {
         loginForm.click();
     }
 
-    public void authorization(String name, String pass) {
+    public void authorization(User user) {
         activateLogIn();
         userName.clear();
-        userName.sendKeys(name);
+        userName.sendKeys(user.getUserName());
         password.clear();
-        password.sendKeys(pass);
+        password.sendKeys(user.getPassword());
         submit.click();
     }
 
