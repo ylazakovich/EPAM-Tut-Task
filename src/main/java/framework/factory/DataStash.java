@@ -1,5 +1,6 @@
 package framework.factory;
 
+import framework.factory.sql.SqlManager;
 import framework.factory.users.User;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class DataStash {
     private static List<User> getUserList() {
         switch (DATA_TYPE.toLowerCase()) {
             case SQL:
+                getListBySQL();
                 break;
             case XML:
                 break;
@@ -29,10 +31,12 @@ public class DataStash {
         return users;
     }
 
-    private static List<User> getListBySQL() {
-
-        return null;
+    public static List<User> getListBySQL() {
+        for (int i = 1; i <= SqlManager.getSizeDB(); i++) {
+            SqlManager.selectLine(i);
+            users.add(new User(SqlManager.getEmail(), SqlManager.getPassword()));
+        }
+        return users;
     }
-
 
 }

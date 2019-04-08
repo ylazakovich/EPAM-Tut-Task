@@ -35,7 +35,7 @@ public class SqlManager {
 
     }
 
-    public static int count() {
+    public static int getSizeDB() {
         String SQL = "SELECT email FROM users;";
         try {
             Connection conn = SqlUtil.getConnection();
