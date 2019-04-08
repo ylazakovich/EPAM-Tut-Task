@@ -11,8 +11,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,18 +31,19 @@ public class DataStash {
     private static List<User> getUserList() {
         switch (DATA_TYPE.toLowerCase()) {
             case SQL:
-                getListBySQL();
+                getUserListBySQL();
                 break;
             case XML:
+                getUserListByXML();
                 break;
             case CSV:
+                getUserListByCSV();
                 break;
         }
-
         return users;
     }
 
-    public static List<User> getListBySQL() {
+    private static List<User> getUserListBySQL() {
         for (int i = 1; i <= SqlManager.getSizeDB(); i++) {
             SqlManager.selectLine(i);
             users.add(new User(SqlManager.getEmail(), SqlManager.getPassword()));
@@ -51,7 +51,7 @@ public class DataStash {
         return users;
     }
 
-    public static List<User> getListByXML() {
+    private static List<User> getUserListByXML() {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         Document document;
@@ -71,14 +71,34 @@ public class DataStash {
                 }
             }
 
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        } catch (SAXException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
         return users;
     }
 
-    public static List<User> getUsers() {
+    private static List<User> getUserListByCSV() {
+        BufferedReader br;
+        String line;
+        try {
+            br = new BufferedReader(new FileReader(DATA_PATH + "users.csv"));
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                users.add(new User(data[0], data[1]));
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return users;
     }
 
