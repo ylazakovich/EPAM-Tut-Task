@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Tut Suite" verbose="5" data-provider-thread-count="1">
-    <test name="account_1">
-        <parameter name="username" value="rotf10corp@tut.by"/>
-        <parameter name="password" value="qq3858122"/>
+    <test name="TestCase for 2 account">
         <classes>
             <class name="TUTTest"/>
         </classes>
     </test>
-    <!--<test name="account_2">-->
-    <!--<parameter name="username" value="rotf20corp@tut.by"/>-->
-    <!--<parameter name="password" value="qq3858122"/>-->
-    <!--<classes>-->
-    <!--<class name="TUTTest"/>-->
-    <!--</classes>-->
-    <!--</test>-->
 </suite>
