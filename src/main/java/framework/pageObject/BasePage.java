@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 
-public abstract class BasePage implements IInvokable {
+public abstract class BasePage {
     private final BrowserFactory factory = BrowserFactory.getInstance();
     private WebDriver driver = factory.getDriver();
 
