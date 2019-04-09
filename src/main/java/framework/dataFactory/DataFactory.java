@@ -1,6 +1,6 @@
 package framework.dataFactory;
 
-import framework.utils.PropertyReader;
+import framework.PropertyReader;
 import framework.utils.sql.SqlManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -12,6 +12,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +36,20 @@ public class DataFactory {
             case "csv":
                 getUserListByCSV();
                 break;
+            default:
+                getUserListBySQL();
         }
         return users;
     }
 
     private static List<User> getUserListBySQL() {
-        for (int i = 1; i <= SqlManager.getSizeDB(); i++) {
-            SqlManager.selectLine(i);
-            users.add(new User(SqlManager.getEmail(), SqlManager.getPassword()));
+        try {
+            for (int i = 1; i <= SqlManager.getSizeTable("email", "users"); i++) {
+                SqlManager.selectUser(i, "email", "password", "users");
+                users.add(new User(SqlManager.getField_1(), SqlManager.getField_2()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return users;
     }

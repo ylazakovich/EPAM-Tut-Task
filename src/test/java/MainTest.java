@@ -9,7 +9,7 @@ import pages.MainPage;
 import java.util.List;
 
 
-public class TUTTest extends BaseEntity {
+public class MainTest extends BaseEntity {
 
     @DataProvider(name = "getUsers")
     public Object[][] getUsers() {

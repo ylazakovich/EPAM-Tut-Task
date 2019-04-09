@@ -1,6 +1,6 @@
 package framework.utils.sql;
 
-import framework.utils.PropertyReader;
+import framework.PropertyReader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -30,26 +30,16 @@ public class SqlUtil extends SqlManager {
         }
     }
 
-    protected static Connection setConnect() {
+    protected static Connection setConnect() throws SQLException {
         initPostgreSQLDriver();
-        try {
             connection = DriverManager
                     .getConnection(DB_URL, USER, PASS);
 
-        } catch (SQLException e) {
-            System.out.println("Connection Failed");
-        }
         isConnect();
         return connection;
     }
 
-    public static void downConnect() throws SQLException {
-        if (connection != null) {
-            connection.close();
-        }
-    }
-
-    protected static Connection getConnection() {
+    protected static Connection getConnection() throws SQLException {
         if (connection == null) {
             setConnect();
         }

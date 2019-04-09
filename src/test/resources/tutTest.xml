@@ -3,7 +3,7 @@
 <suite name="Tut Suite" verbose="5" data-provider-thread-count="1">
     <test name="TestCase for 2 account">
         <classes>
-            <class name="TUTTest"/>
+            <class name="MainTest"/>
         </classes>
     </test>
 </suite>

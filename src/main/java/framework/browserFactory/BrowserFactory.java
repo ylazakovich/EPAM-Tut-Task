@@ -1,6 +1,6 @@
 package framework.browserFactory;
 
-import framework.utils.PropertyReader;
+import framework.PropertyReader;
 import framework.utils.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -94,7 +94,7 @@ public class BrowserFactory {
                 break;
             default:
                 SetPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
-                driver = new ChromeDriver();
+                driver = new ChromeDriver(CapabilityGenerator.getChromeCapability());
 
         }
     }
