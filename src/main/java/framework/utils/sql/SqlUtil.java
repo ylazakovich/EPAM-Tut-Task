@@ -1,6 +1,6 @@
-package framework.dataFactory.sql;
+package framework.utils.sql;
 
-import framework.PropertyReader;
+import framework.utils.PropertyReader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

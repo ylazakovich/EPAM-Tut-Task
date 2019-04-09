@@ -1,7 +1,7 @@
 package framework;
 
-import framework.factory.BrowserFactory;
-import framework.factory.WebDriverManager;
+import framework.browserFactory.BrowserFactory;
+import framework.utils.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

@@ -1,4 +1,4 @@
-package framework;
+package framework.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

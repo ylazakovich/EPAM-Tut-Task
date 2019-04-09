@@ -1,7 +1,7 @@
 package framework.elements;
 
 import framework.BaseEntity;
-import framework.factory.BrowserFactory;
+import framework.browserFactory.BrowserFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

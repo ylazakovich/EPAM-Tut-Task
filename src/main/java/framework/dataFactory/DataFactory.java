@@ -1,7 +1,7 @@
 package framework.dataFactory;
 
-import framework.PropertyReader;
-import framework.dataFactory.sql.SqlManager;
+import framework.utils.PropertyReader;
+import framework.utils.sql.SqlManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -24,7 +24,7 @@ public class DataFactory {
     private static String userName;
     private static String password;
 
-    protected static List<User> getUserList() {
+    public static List<User> getUserList() {
         switch (DATA_TYPE.toLowerCase()) {
             case "sql":
                 getUserListBySQL();
