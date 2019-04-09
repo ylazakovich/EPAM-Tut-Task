@@ -13,17 +13,16 @@ import java.sql.SQLException;
 public class BaseEntity {
     private final BrowserFactory factory = BrowserFactory.getInstance();
 
-    private WebDriverManager webDriverManager = factory.getWebDriverManager();
     private WebDriver driver = factory.getDriver();
 
     @BeforeClass
     public void before() {
-        webDriverManager.maximize(driver);
+        WebDriverManager.maximize(driver);
     }
 
     @AfterClass
     public void after() throws SQLException {
-        webDriverManager.close(driver);
+        WebDriverManager.close(driver);
         SqlManager.downConnect();
     }
 }

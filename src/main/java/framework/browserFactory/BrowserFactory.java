@@ -26,21 +26,23 @@ public class BrowserFactory {
     private static final String DRIVER_CHROME = "chromedriver";
     private static final String DRIVER_FIREFOX = "geckodriver";
     private static final String DRIVER_IE = "IEDriverServer";
+
+    private BrowserFactory() throws IOException {
+        driverPath = new File(driverPath).getCanonicalPath();
+        initBrowser(browserName);
+        WebDriverManager.openUrl(driver, url);
+    }
+
     private static String driverPath = "src/main/resources/";
 
     private static BrowserFactory instance;
     private static WebDriver driver;
 
-    private final WebDriverManager webDriverManager = new WebDriverManager();
-
     private static final String browserName = PropertyReader.getProperty("browserName");
     private static final String url = PropertyReader.getProperty("url");
 
-
-    private BrowserFactory() throws IOException {
-        driverPath = new File(driverPath).getCanonicalPath();
-        initBrowser(browserName);
-        webDriverManager.openUrl(driver, url);
+    public static String getDriverPath() {
+        return driverPath;
     }
 
     public static BrowserFactory getInstance() {
@@ -56,10 +58,6 @@ public class BrowserFactory {
         return instance;
     }
 
-    protected static String getDriverPath() {
-        return driverPath;
-    }
-
     private static String initOS(String operatingSystemName) {
         System.out.println("Current Operating System: " + System.getProperties().getProperty("os.name"));
         return operatingSystemName.toLowerCase().equals(LINUX) ? "" : ".exe";
@@ -71,10 +69,6 @@ public class BrowserFactory {
 
     public WebDriver getDriver() {
         return driver;
-    }
-
-    public WebDriverManager getWebDriverManager() {
-        return webDriverManager;
     }
 
     private void initBrowser(String browserName) {

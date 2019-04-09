@@ -4,19 +4,19 @@ import org.openqa.selenium.WebDriver;
 
 public class WebDriverManager {
 
-    public void openUrl(WebDriver driver, String url) {
+    public static void openUrl(WebDriver driver, String url) {
         driver.get(url);
     }
 
-    public void maximize(WebDriver driver) {
+    public static void maximize(WebDriver driver) {
         driver.manage().window().maximize();
     }
 
-    public void refresh(WebDriver driver) {
+    public static void refresh(WebDriver driver) {
         driver.navigate().refresh();
     }
 
-    public void close(WebDriver driver) {
+    public static void close(WebDriver driver) {
         if (driver != null) {
             driver.quit();
         }
