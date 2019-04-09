@@ -27,20 +27,22 @@ public class MainTest extends BaseEntity {
         User sender = users.get(0);
         User recipient = users.get(1);
 
-
         String subject = "This is subject";
         String message = "SSL: This is text body";
 
+        MainPage mainPage;
+        LoginPage loginPage;
+        MailPage mailPage;
+
         JavaMail.send(sender, recipient.getEmail(), subject, message);
 
-        MainPage mainPage = new MainPage();
-        mainPage.authorization(sender);
-        LoginPage loginPage = new LoginPage();
-        loginPage.goToEmail();
-        MailPage mailPage = new MailPage();
-        mailPage.goToSentFolder();
+        mainPage = new MainPage();
+        loginPage = mainPage.authorization(sender);
+        mailPage = loginPage.goToEmail();
+//        MyPage.MainPage().authorization(sender);
+//        MyPage.LoginPage().goToEmail();
+//        MyPage.MailPage().goToSentFolder();
 
-        loginPage.logOut();
 
     }
 

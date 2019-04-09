@@ -28,13 +28,14 @@ public class MainPage extends BasePage {
         loginForm.click();
     }
 
-    public void authorization(User user) {
+    public LoginPage authorization(User user) {
         activateLogIn();
         userName.clear();
         userName.sendKeys(user.getEmail());
         password.clear();
         password.sendKeys(user.getPassword());
         submit.click();
+        return new LoginPage();
     }
 
 

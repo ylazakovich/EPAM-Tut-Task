@@ -29,9 +29,10 @@ public class LoginPage extends BasePage {
         logOutButton.click();
     }
 
-    public void goToEmail() {
+    public MailPage goToEmail() {
         activateLogForm();
         mailButton.click();
+        return new MailPage();
     }
 
 }
