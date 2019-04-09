@@ -31,7 +31,7 @@ public class MainPage extends BasePage {
     public void authorization(User user) {
         activateLogIn();
         userName.clear();
-        userName.sendKeys(user.getUserName());
+        userName.sendKeys(user.getEmail());
         password.clear();
         password.sendKeys(user.getPassword());
         submit.click();
