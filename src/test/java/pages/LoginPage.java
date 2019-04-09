@@ -12,17 +12,26 @@ public class LoginPage extends BasePage {
     private WebElement logForm;
     @FindBy(xpath = "//a[contains(@href, 'logout')]")
     private WebElement logOutButton;
+    @FindBy(xpath = "//a[contains(@href,'profile.tut.by/mail')]")
+    private WebElement mailButton;
+
 
     public LoginPage() {
         super(uniqLocator);
     }
 
-    private void activateLogOutForm() {
+    private void activateLogForm() {
         logForm.click();
     }
 
     public void logOut() {
-        activateLogOutForm();
+        activateLogForm();
         logOutButton.click();
     }
+
+    public void goToEmail() {
+        activateLogForm();
+        mailButton.click();
+    }
+
 }

@@ -1,6 +1,6 @@
 # QATests_UI_API
 
-UI/API tests for tut.by
+Tests for tut.by
 
 ## SCENARIO
 

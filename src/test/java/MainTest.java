@@ -1,9 +1,11 @@
 import framework.BaseEntity;
 import framework.dataFactory.DataFactory;
 import framework.dataFactory.User;
+import framework.mail.JavaMail;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import pages.MailPage;
 import pages.MainPage;
 
 import java.util.List;
@@ -25,9 +27,19 @@ public class MainTest extends BaseEntity {
         User sender = users.get(0);
         User recipient = users.get(1);
 
+
+        String subject = "This is subject";
+        String message = "SSL: This is text body";
+
+        JavaMail.send(sender, recipient.getEmail(), subject, message);
+
         MainPage mainPage = new MainPage();
         mainPage.authorization(sender);
         LoginPage loginPage = new LoginPage();
+        loginPage.goToEmail();
+        MailPage mailPage = new MailPage();
+        mailPage.goToSentFolder();
+
         loginPage.logOut();
 
     }
