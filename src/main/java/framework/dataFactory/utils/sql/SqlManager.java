@@ -1,4 +1,4 @@
-package framework.utils.sql;
+package framework.dataFactory.utils.sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

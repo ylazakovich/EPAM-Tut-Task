@@ -1,8 +1,8 @@
 package framework;
 
 import framework.browserFactory.BrowserFactory;
-import framework.utils.WebDriverManager;
-import framework.utils.sql.SqlManager;
+import framework.browserFactory.utils.WebDriverManager;
+import framework.dataFactory.utils.sql.SqlManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

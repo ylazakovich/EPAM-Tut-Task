@@ -1,4 +1,4 @@
-package framework.utils;
+package framework.browserFactory.utils;
 
 import org.openqa.selenium.WebDriver;
 

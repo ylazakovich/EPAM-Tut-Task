@@ -1,6 +1,7 @@
 package framework.pageObject;
 
 import framework.browserFactory.BrowserFactory;
+import framework.browserFactory.utils.Waiter;
 import framework.elements.Button;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,7 @@ public abstract class BasePage {
 
 
     public BasePage(By locator) {
+        Waiter.implicitWait(BrowserFactory.getInstance().getDriver());
         PageFactory.initElements(driver, this);
         init(locator);
         Assert.assertEquals(true, isOpen(locator));

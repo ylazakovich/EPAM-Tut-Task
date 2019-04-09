@@ -1,4 +1,4 @@
-package framework.utils.sql;
+package framework.dataFactory.utils.sql;
 
 import framework.PropertyReader;
 

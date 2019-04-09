@@ -1,8 +1,6 @@
 package pages;
 
-import framework.browserFactory.BrowserFactory;
 import framework.pageObject.BasePage;
-import framework.utils.Waiter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,7 +22,6 @@ public class LoginPage extends BasePage {
     }
 
     public void logOut() {
-        Waiter.implicitWait(BrowserFactory.getInstance().getDriver());
         activateLogOutForm();
         logOutButton.click();
     }
