@@ -18,11 +18,13 @@ public class MailPage extends BasePage {
         super(mailLocator);
     }
 
+    public static By getMailLocator() {
+        return mailLocator;
+    }
+
     public void goToSentFolder() {
         sentFolder.click();
     }
 
-    public static By getMailLocator() {
-        return mailLocator;
-    }
+
 }

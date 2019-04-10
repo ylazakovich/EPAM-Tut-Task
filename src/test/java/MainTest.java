@@ -26,7 +26,7 @@ public class MainTest extends BaseEntity {
         User recipient = users.get(1);
 
         String subject = "This is subject";
-        String message = "SSL: This is text body";
+        String message = "SSL: This is text";
 
         IndexPage page = new IndexPage();
 
