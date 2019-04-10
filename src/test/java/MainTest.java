@@ -32,7 +32,11 @@ public class MainTest extends BaseEntity {
 
         JavaMail.send(sender, recipient.getEmail(), subject, message);
 
-        page.authorization(sender).goToEmail().goToSentFolder().assertSentMessage(recipient.getEmail(), subject);
+        page.authorization(sender).
+                goToEmail().goToSentFolder().assertSentMessage(recipient.getEmail(), subject)
+                .goToLoginPage().logOut();
+
+        page.authorization(recipient).goToEmail();
 
     }
 

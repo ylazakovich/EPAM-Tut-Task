@@ -1,6 +1,8 @@
 package pages;
 
+import framework.PropertyReader;
 import framework.browserFactory.utils.Waiter;
+import framework.browserFactory.utils.WebDriverManager;
 import framework.elements.Label;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
@@ -40,12 +42,19 @@ public class MailPage extends BasePage {
 
     }
 
-    public void assertSentMessage(String recipientEmail, String expectedSubject) {
+    public MailPage assertSentMessage(String recipientEmail, String expectedSubject) {
         String actualEmail = recipientLabel.getTextElements(recipientEmails).get(1);
         Assert.assertEquals(actualEmail, recipientEmail);
 
         String actualSubject = subjectLabel.getTextElements(subjectColumn).get(1);
         Assert.assertEquals(actualSubject, expectedSubject);
+        return this;
+    }
+
+    public LoginPage goToLoginPage() {
+        WebDriverManager.openUrl(getDriver(), PropertyReader.getProperty("url"));
+        Waiter.fluentWait(getDriver(), LoginPage.getUniqLocator());
+        return new LoginPage();
     }
 
 
