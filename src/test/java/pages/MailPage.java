@@ -1,12 +1,21 @@
 package pages;
 
+import framework.browserFactory.utils.Waiter;
+import framework.elements.Label;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class MailPage extends BasePage {
     private static By mailLocator = By.xpath("//div[@class='mail-User-Name']");
+
+    private static By recipientEmails = By.xpath("//div[@class='mail-MessageSnippet-Content']/..//span[@class='mail-MessageSnippet-FromText']");
+    private static Label recipientLabel;
+    private static By subjectColumn = By.xpath("//span[contains(@class,'mail') and contains(@class, 'Item_subject')]/span[@title]");
+    private static Label subjectLabel;
+
 
     @FindBy(xpath = "//div[contains(@data-key,'view=folders')]/a[2]")
     private WebElement sentFolder;
@@ -22,8 +31,21 @@ public class MailPage extends BasePage {
         return mailLocator;
     }
 
-    public void goToSentFolder() {
+    public MailPage goToSentFolder() {
         sentFolder.click();
+        Waiter.fluentWait(getDriver(), recipientEmails);
+        recipientLabel = new Label(recipientEmails);
+        subjectLabel = new Label(subjectColumn);
+        return this;
+
+    }
+
+    public void assertSentMessage(String recipientEmail, String expectedSubject) {
+        String actualEmail = recipientLabel.getTextElements(recipientEmails).get(1);
+        Assert.assertEquals(actualEmail, recipientEmail);
+
+        String actualSubject = subjectLabel.getTextElements(subjectColumn).get(1);
+        Assert.assertEquals(actualSubject, expectedSubject);
     }
 
 
