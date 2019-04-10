@@ -1,12 +1,13 @@
 package pages;
 
+import framework.browserFactory.utils.Waiter;
 import framework.dataFactory.User;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MainPage extends BasePage {
+public class IndexPage extends BasePage {
     @FindBy(xpath = "//a[contains(@class, 'enter')]")
     private WebElement loginForm;
     @FindBy(xpath = "//a[contains(@href, 'logout')]")
@@ -20,12 +21,16 @@ public class MainPage extends BasePage {
 
     private static By uniqueElement = By.xpath("//a[@class='enter']");
 
-    public MainPage() {
+    public IndexPage() {
         super(uniqueElement);
     }
 
     private void activateLogIn() {
         loginForm.click();
+    }
+
+    public static By getUniqueElement() {
+        return uniqueElement;
     }
 
     public LoginPage authorization(User user) {
@@ -35,8 +40,7 @@ public class MainPage extends BasePage {
         password.clear();
         password.sendKeys(user.getPassword());
         submit.click();
+        Waiter.implicitWait(getDriver());
         return new LoginPage();
     }
-
-
 }

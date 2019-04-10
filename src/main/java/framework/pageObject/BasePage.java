@@ -17,7 +17,7 @@ public abstract class BasePage {
     private Button button;
 
     public BasePage(By locator) {
-        Waiter.implicitWait(BrowserFactory.getInstance().getDriver());
+        Waiter.fluentWait(driver, locator);
         PageFactory.initElements(driver, this);
         init(locator);
         Assert.assertEquals(true, isOpen(locator));
@@ -35,4 +35,5 @@ public abstract class BasePage {
     public WebDriver getDriver() {
         return driver;
     }
+
 }

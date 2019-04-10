@@ -1,9 +1,13 @@
 package pages;
 
+import framework.PropertyReader;
+import framework.browserFactory.utils.Waiter;
+import framework.browserFactory.utils.WebDriverManager;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 
 public class LoginPage extends BasePage {
     private static By uniqLocator = By.xpath("//span[@class='uname']");
@@ -14,7 +18,6 @@ public class LoginPage extends BasePage {
     private WebElement logOutButton;
     @FindBy(xpath = "//a[contains(@href,'profile.tut.by/mail')]")
     private WebElement mailButton;
-
 
     public LoginPage() {
         super(uniqLocator);
@@ -29,10 +32,13 @@ public class LoginPage extends BasePage {
         logOutButton.click();
     }
 
-    public MailPage goToEmail() {
-        activateLogForm();
-        mailButton.click();
-        return new MailPage();
+    public static By getUniqLocator() {
+        return uniqLocator;
     }
 
+    public MailPage goToEmail() {
+        WebDriverManager.openUrl(getDriver(), PropertyReader.getProperty("mailUrl"));
+        Waiter.explicitWait(getDriver(), MailPage.getMailLocator());
+        return new MailPage();
+    }
 }

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class MailPage extends BasePage {
-    private static By mailLocator = By.xpath("//span[contains(@class,'mail-ComposeButton-Text')]");
+    private static By mailLocator = By.xpath("//div[@class='mail-User-Name']");
 
     @FindBy(xpath = "//div[contains(@data-key,'view=folders')]/a[2]")
     private WebElement sentFolder;
@@ -22,4 +22,7 @@ public class MailPage extends BasePage {
         sentFolder.click();
     }
 
+    public static By getMailLocator() {
+        return mailLocator;
+    }
 }
