@@ -4,6 +4,7 @@ import framework.PropertyReader;
 import framework.browserFactory.utils.Waiter;
 import framework.browserFactory.utils.WebDriverManager;
 import framework.elements.Label;
+import framework.elements.Title;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -11,15 +12,15 @@ import org.testng.Assert;
 public class MailPage extends BasePage {
     private static By mailLocator = By.xpath("//div[@class='mail-User-Name']");
 
-    // Sent Folder
     private static By nestedLocator = By.xpath("//div[@data-key='view=folders']");
     private static By nestedItem = By.xpath("//span[@class='mail-NestedList-Item-Name']");
     private static Label nestedList;
 
+    // Sent Folder
     private static By recipientEmails = By.xpath("//span[@class='mail-MessageSnippet-FromText']");
     private static By subjectColumn = By.xpath("//span[contains(@class,'mail') and contains(@class, 'Item_subject')]/span[@title]");
-    private static Label recipientLabel;
-    private static Label subjectLabel;
+    private static Title recipientTitles;
+    private static Title subjectTitles;
 
     // Inbox Folder
     private static By messageInboxFolder = By.xpath("//div[contains(@class,'mail-MessagesList')]");
@@ -38,9 +39,9 @@ public class MailPage extends BasePage {
     public MailPage goToSentFolder() {
         nestedList = new Label(nestedLocator);
         nestedList.getElements(nestedItem).get(1).click();
-        Waiter.fluentWait(getDriver(), recipientEmails);
-        recipientLabel = new Label(recipientEmails);
-        subjectLabel = new Label(subjectColumn);
+        Waiter.fluentWait(getDriver(), mailLocator);
+        recipientTitles = new Title(recipientEmails);
+        subjectTitles = new Title(subjectColumn);
         return this;
 
     }
@@ -53,10 +54,10 @@ public class MailPage extends BasePage {
     }
 
     public MailPage assertSentMessage(String recipientEmail, String expectedSubject) {
-        String actualEmail = recipientLabel.getElements(recipientEmails).get(0).getAttribute("title");
+        String actualEmail = recipientTitles.getTextElements(recipientEmails).get(0);
         Assert.assertEquals(actualEmail, recipientEmail);
 
-        String actualSubject = subjectLabel.getElements(subjectColumn).get(0).getText();
+        String actualSubject = subjectTitles.getTextElements(subjectColumn).get(0);
         Assert.assertEquals(actualSubject, expectedSubject);
         return this;
     }
