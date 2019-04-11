@@ -4,7 +4,9 @@ import framework.browserFactory.BrowserFactory;
 import framework.browserFactory.utils.Waiter;
 import framework.elements.Button;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 
@@ -34,4 +36,8 @@ public abstract class BasePage {
         return driver;
     }
 
+    public void escapeFromADB() {
+        WebElement body = getDriver().findElement(By.tagName("body"));
+        body.sendKeys(Keys.SPACE);
+    }
 }

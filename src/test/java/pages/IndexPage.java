@@ -6,8 +6,6 @@ import framework.elements.Button;
 import framework.elements.Input;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 
 public class IndexPage extends BasePage {
     private static By indexPageLocator = By.xpath("//a[@class='enter']");
@@ -38,10 +36,5 @@ public class IndexPage extends BasePage {
         submit.moveToElement();
         Waiter.fluentWait(getDriver(), LoginPage.getLoginPageLocator());
         return new LoginPage();
-    }
-
-    private void escapeFromADB() {
-        WebElement body = getDriver().findElement(By.tagName("body"));
-        body.sendKeys(Keys.SPACE);
     }
 }
