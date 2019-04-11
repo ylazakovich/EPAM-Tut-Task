@@ -31,7 +31,7 @@ public class Waiter extends BaseEntity {
                 .pollingEvery(timeMilliseconds)
                 .ignoring(NoSuchElementException.class);
         if (by != null) {
-            fluentWait.until(ExpectedConditions.elementToBeClickable(by));
+            fluentWait.until(ExpectedConditions.presenceOfElementLocated(by));
         }
         return fluentWait;
     }

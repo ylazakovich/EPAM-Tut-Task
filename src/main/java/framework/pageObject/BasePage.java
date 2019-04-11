@@ -5,7 +5,6 @@ import framework.browserFactory.utils.Waiter;
 import framework.elements.Button;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 
@@ -17,8 +16,7 @@ public abstract class BasePage {
     private Button button;
 
     public BasePage(By locator) {
-        Waiter.fluentWait(driver, locator);
-        PageFactory.initElements(driver, this);
+        Waiter.fluentWait(getDriver(), locator);
         init(locator);
         Assert.assertEquals(true, isOpen(locator));
     }

@@ -1,34 +1,29 @@
 package pages;
 
 import framework.PropertyReader;
+import framework.browserFactory.utils.Waiter;
 import framework.browserFactory.utils.WebDriverManager;
+import framework.elements.Button;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 
 public class LoginPage extends BasePage {
-    private static By uniqLocator = By.xpath("//span[@class='uname']");
+    private static By uniqLocator = By.id("search_from_str");
 
-    @FindBy(xpath = "//span[@class='uname']")
-    private WebElement logForm;
-    @FindBy(xpath = "//a[contains(@href, 'logout')]")
-    private WebElement logOutButton;
-    @FindBy(xpath = "//a[contains(@href,'profile.tut.by/mail')]")
-    private WebElement mailButton;
+    private By loginFormLocator = By.xpath("//a[contains(@class, 'enter')]");
+    private Button loginForm = new Button(loginFormLocator);
+    private By logOutLocator = By.xpath("//a[contains(@href, 'logout')]");
+    private Button logOutButton = new Button(logOutLocator);
 
     public LoginPage() {
         super(uniqLocator);
     }
 
-    private void activateLogForm() {
-        logForm.click();
-    }
-
     public void logOut() {
-        activateLogForm();
-        logOutButton.click();
+        loginForm.moveToElement();
+        Waiter.fluentWait(getDriver(), logOutLocator);
+        logOutButton.moveToElement();
     }
 
     public static By getUniqLocator() {
@@ -37,7 +32,7 @@ public class LoginPage extends BasePage {
 
     public MailPage goToEmail() {
         WebDriverManager.openUrl(getDriver(), PropertyReader.getProperty("mailUrl"));
-//        Waiter.explicitWait(getDriver(), MailPage.getMailLocator());
+        Waiter.explicitWait(getDriver(), MailPage.getMailLocator());
         return new MailPage();
     }
 }

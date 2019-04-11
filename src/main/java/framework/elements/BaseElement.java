@@ -29,10 +29,6 @@ public abstract class BaseElement extends BaseEntity {
         return driver.findElements(by);
     }
 
-    public List<WebElement> getElements() {
-        return driver.findElements(by);
-    }
-
     public String getElementText(WebElement element) {
         element = getElement(by);
         if (isEnable()) {

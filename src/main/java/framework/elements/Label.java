@@ -16,7 +16,7 @@ public class Label extends BaseElement {
     public List<String> getTextElements(By by) {
         labelList = new ArrayList<>();
         for (WebElement webElement :
-                super.getElements(by)) {
+                getElements(by)) {
             labelList.add(getElementText(webElement));
         }
         return labelList;
