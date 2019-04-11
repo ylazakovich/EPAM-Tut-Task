@@ -5,6 +5,7 @@ import framework.browserFactory.BrowserFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public abstract class BaseElement extends BaseEntity {
     private WebElement element;
     private By by;
     private Actions actions;
+    private Action action;
     private WebDriver driver = factory.getDriver();
 
     public BaseElement(By by) {
@@ -49,6 +51,8 @@ public abstract class BaseElement extends BaseEntity {
 
     public void moveToElement() {
         actions = new Actions(driver);
-        actions.moveToElement(getElement(by)).build().perform();
+        actions.moveToElement(getElement(by)).click(getElement(by));
+        action = actions.build();
+        action.perform();
     }
 }
