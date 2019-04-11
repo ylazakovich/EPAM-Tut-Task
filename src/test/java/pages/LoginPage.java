@@ -1,7 +1,6 @@
 package pages;
 
 import framework.PropertyReader;
-import framework.browserFactory.utils.Waiter;
 import framework.browserFactory.utils.WebDriverManager;
 import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
@@ -38,7 +37,7 @@ public class LoginPage extends BasePage {
 
     public MailPage goToEmail() {
         WebDriverManager.openUrl(getDriver(), PropertyReader.getProperty("mailUrl"));
-        Waiter.explicitWait(getDriver(), MailPage.getMailLocator());
+//        Waiter.explicitWait(getDriver(), MailPage.getMailLocator());
         return new MailPage();
     }
 }

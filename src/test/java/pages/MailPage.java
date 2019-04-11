@@ -13,11 +13,18 @@ import org.testng.Assert;
 public class MailPage extends BasePage {
     private static By mailLocator = By.xpath("//div[@class='mail-User-Name']");
 
+    // Sent Folder
     private static By recipientEmails = By.xpath("//div[@class='mail-MessageSnippet-Content']/..//span[@class='mail-MessageSnippet-FromText']");
-    private static Label recipientLabel;
     private static By subjectColumn = By.xpath("//span[contains(@class,'mail') and contains(@class, 'Item_subject')]/span[@title]");
+    private static Label recipientLabel;
     private static Label subjectLabel;
 
+    // Inbox Folder
+    private static By messageInboxFolder = By.xpath("//div[contains(@class,'mail-MessagesList')]");
+    private static Label inboxFolderLabel = new Label(messageInboxFolder);
+    private static By innerMessageLocator = By.xpath("//div[contains(@data-key,'view=messages-item-inner')]");
+    private static By messageLine = By.xpath("//div[@class='mail-MessageSnippet-Content']");
+    private static Label innerMessageLabel;
 
     @FindBy(xpath = "//div[contains(@data-key,'view=folders')]/a[2]")
     private WebElement sentFolder;
@@ -42,6 +49,17 @@ public class MailPage extends BasePage {
 
     }
 
+    public MessagePage goToFirstMessage() {
+        inboxFolderLabel.getElements(messageLine).get(0).click();
+        if (inboxFolderLabel.getElements(messageLine).get(0).isSelected()) {
+            Waiter.fluentWait(getDriver(), innerMessageLocator);
+            innerMessageLabel = new Label(innerMessageLocator);
+            System.out.println(innerMessageLabel.getElements().size());
+            innerMessageLabel.getElements().get(0).click();
+        }
+        return new MessagePage();
+    }
+
     public MailPage assertSentMessage(String recipientEmail, String expectedSubject) {
         String actualEmail = recipientLabel.getTextElements(recipientEmails).get(1);
         Assert.assertEquals(actualEmail, recipientEmail);
@@ -53,7 +71,6 @@ public class MailPage extends BasePage {
 
     public LoginPage goToLoginPage() {
         WebDriverManager.openUrl(getDriver(), PropertyReader.getProperty("url"));
-        Waiter.fluentWait(getDriver(), LoginPage.getUniqLocator());
         return new LoginPage();
     }
 

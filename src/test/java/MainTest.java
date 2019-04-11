@@ -26,7 +26,7 @@ public class MainTest extends BaseEntity {
         User recipient = users.get(1);
 
         String subject = "This is subject";
-        String message = "SSL: This is text";
+        String message = "SSL: This is text[2]";
 
         IndexPage page = new IndexPage();
 
@@ -36,7 +36,7 @@ public class MainTest extends BaseEntity {
                 goToEmail().goToSentFolder().assertSentMessage(recipient.getEmail(), subject)
                 .goToLoginPage().logOut();
 
-        page.authorization(recipient).goToEmail();
+        page.authorization(recipient).goToEmail().goToFirstMessage();
 
     }
 

@@ -20,6 +20,7 @@ public class IndexPage extends BasePage {
     private WebElement submit;
 
     private static By uniqueElement = By.xpath("//a[@class='enter']");
+    private static By registrationLocator = By.xpath("//a[contains(@href,'https://profile.tut.by/newtut.html')]");
 
     public IndexPage() {
         super(uniqueElement);
@@ -27,6 +28,7 @@ public class IndexPage extends BasePage {
 
     private void activateLogIn() {
         loginForm.click();
+        Waiter.fluentWait(getDriver(), registrationLocator);
     }
 
     public static By getUniqueElement() {
@@ -40,7 +42,6 @@ public class IndexPage extends BasePage {
         password.clear();
         password.sendKeys(user.getPassword());
         submit.click();
-        Waiter.implicitWait(getDriver());
         return new LoginPage();
     }
 }
