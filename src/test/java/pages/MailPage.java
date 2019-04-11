@@ -24,8 +24,7 @@ public class MailPage extends BasePage {
     // Sent Folder
     private By recipientEmails = By.xpath("//span[@class='mail-MessageSnippet-FromText']");
     private By subjectColumn = By.xpath("//span[contains(@class,'mail') and contains(@class, 'Item_subject')]/span[@title]");
-    private Title recipientTitles = new Title(recipientEmails);
-    private Title subjectTitles = new Title(subjectColumn);
+    private Title recipientTitles, subjectTitles;
 
     public MailPage() {
         super(mailPageLocator);
@@ -44,7 +43,7 @@ public class MailPage extends BasePage {
     public MailPage goToSentFolder() {
         nestedList = new Label(nestedLocator);
         nestedList.getElements(nestedItem).get(1).click();
-        Waiter.fluentWait(getDriver(), getMailPageLocator());
+        Waiter.explicitWait(getDriver(), recipientEmails);
         return this;
     }
 
@@ -56,9 +55,11 @@ public class MailPage extends BasePage {
     }
 
     public MailPage assertSentMessage(String recipientEmail, String expectedSubject) {
+        recipientTitles = new Title(recipientEmails);
         String actualEmail = recipientTitles.getTextElements(recipientEmails).get(0);
         Assert.assertEquals(actualEmail, recipientEmail);
 
+        subjectTitles = new Title(subjectColumn);
         String actualSubject = subjectTitles.getTextElements(subjectColumn).get(0);
         Assert.assertEquals(actualSubject, expectedSubject);
         return this;
