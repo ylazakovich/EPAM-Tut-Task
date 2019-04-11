@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 
 
 public class LoginPage extends BasePage {
-    private static By uniqLocator = By.id("search_from_str");
+    private static By loginPageLocator = By.id("search_from_str");
 
     private By loginFormLocator = By.xpath("//a[contains(@class, 'enter')]");
     private Button loginForm = new Button(loginFormLocator);
@@ -17,7 +17,7 @@ public class LoginPage extends BasePage {
     private Button logOutButton = new Button(logOutLocator);
 
     public LoginPage() {
-        super(uniqLocator);
+        super(loginPageLocator);
     }
 
     public void logOut() {
@@ -26,13 +26,13 @@ public class LoginPage extends BasePage {
         logOutButton.moveToElement();
     }
 
-    public static By getUniqLocator() {
-        return uniqLocator;
+    public static By getLoginPageLocator() {
+        return loginPageLocator;
     }
 
     public MailPage goToEmail() {
         WebDriverManager.openUrl(getDriver(), PropertyReader.getProperty("mailUrl"));
-        Waiter.explicitWait(getDriver(), MailPage.getMailLocator());
+        Waiter.explicitWait(getDriver(), MailPage.getMailPageLocator());
         return new MailPage();
     }
 }

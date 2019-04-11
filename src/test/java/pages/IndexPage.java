@@ -10,6 +10,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 public class IndexPage extends BasePage {
+    private static By indexPageLocator = By.xpath("//a[@class='enter']");
+
     private By loginFormLocator = By.xpath("//a[contains(@class, 'enter')]");
     private Button loginForm = new Button(loginFormLocator);
     private By userNameLocator = By.xpath("//div[@class='i-holder']/input[@name='login']");
@@ -19,15 +21,12 @@ public class IndexPage extends BasePage {
     private By submitLocator = By.xpath("//div[@class='b-hold']/input[@type='submit']");
     private Button submit = new Button(submitLocator);
 
-    private static By uniqueElement = By.xpath("//a[@class='enter']");
-    private static By registrationLocator = By.xpath("//a[contains(@href,'https://profile.tut.by/newtut.html')]");
-
     public IndexPage() {
-        super(uniqueElement);
+        super(indexPageLocator);
     }
 
-    public static By getUniqueElement() {
-        return uniqueElement;
+    public static By getIndexPageLocator() {
+        return indexPageLocator;
     }
 
     public LoginPage authorization(User user) {
@@ -37,7 +36,7 @@ public class IndexPage extends BasePage {
         userName.sendKeys(userNameLocator, user.getEmail());
         password.sendKeys(passwordLocator, user.getPassword());
         submit.moveToElement();
-        Waiter.fluentWait(getDriver(), LoginPage.getUniqLocator());
+        Waiter.fluentWait(getDriver(), LoginPage.getLoginPageLocator());
         return new LoginPage();
     }
 

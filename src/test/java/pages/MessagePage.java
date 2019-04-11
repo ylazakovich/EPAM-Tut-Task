@@ -7,22 +7,23 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 
 public class MessagePage extends BasePage {
-    private static By senderLocator = By.xpath("//div[@class='mail-Message-Sender']");
-    private static Title senderHeader = new Title(senderLocator);
-    private static By messageLocator = By.xpath("//div[@class='mail-Message-Body-Content mail-Message-Body-Content_plain']");
-    private static TextBox messageBox = new TextBox(messageLocator);
+    private static By messagePageLocator = By.xpath("//div[@class='mail-Message-Sender']");
+
+    private Title senderHeader = new Title(messagePageLocator);
+    private By messageLocator = By.xpath("//div[@class='mail-Message-Body-Content mail-Message-Body-Content_plain']");
+    private TextBox messageBox = new TextBox(messageLocator);
 
 
     public MessagePage() {
-        super(senderLocator);
+        super(messagePageLocator);
     }
 
-    public static By getSenderLocator() {
-        return senderLocator;
+    public static By getMessagePageLocator() {
+        return messagePageLocator;
     }
 
     public MessagePage assertMessage(String expectedEmail, String expectedMessage) {
-        String actualSenderEmail = senderHeader.getElementText(senderHeader.getElement(senderLocator));
+        String actualSenderEmail = senderHeader.getElementText(senderHeader.getElement(messagePageLocator));
         Assert.assertEquals(actualSenderEmail, expectedEmail);
 
         String actualTextMessage = messageBox.getElementText(messageBox.getElement(messageLocator));
