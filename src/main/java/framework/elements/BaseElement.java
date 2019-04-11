@@ -49,7 +49,7 @@ public abstract class BaseElement extends BaseEntity {
         }
     }
 
-    public void moveToElement() {
+    public void moveToElementAndClick() {
         actions = new Actions(driver);
         actions.moveToElement(getElement(by)).click(getElement(by));
         action = actions.build();

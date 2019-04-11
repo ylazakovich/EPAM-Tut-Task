@@ -22,7 +22,7 @@ public class BaseEntity {
 
     @AfterClass
     public void after() throws SQLException {
-//        WebDriverManager.close(driver);
+        WebDriverManager.close(driver);
         SqlManager.downConnect();
     }
 }

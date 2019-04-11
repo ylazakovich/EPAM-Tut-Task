@@ -29,11 +29,11 @@ public class IndexPage extends BasePage {
 
     public LoginPage authorization(User user) {
         escapeFromADB();
-        loginForm.moveToElement();
+        loginForm.moveToElementAndClick();
         Waiter.fluentWait(getDriver(), userNameLocator);
         userName.sendKeys(userNameLocator, user.getEmail());
         password.sendKeys(passwordLocator, user.getPassword());
-        submit.moveToElement();
+        submit.moveToElementAndClick();
         Waiter.fluentWait(getDriver(), LoginPage.getLoginPageLocator());
         return new LoginPage();
     }

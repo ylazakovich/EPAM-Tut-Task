@@ -11,6 +11,6 @@ public class Button extends BaseElement {
     }
 
     public void click() {
-        moveToElement();
+        moveToElementAndClick();
     }
 }

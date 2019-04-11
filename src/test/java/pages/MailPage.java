@@ -50,7 +50,7 @@ public class MailPage extends BasePage {
     public MessagePage goToFirstMessage() {
         Label inboxFolderLabel = new Label(messageInboxFolder);
         inboxFolderLabel.getElements(messageLine).get(0).click();
-        Waiter.fluentWait(getDriver(), MessagePage.getMessagePageLocator());
+        Waiter.explicitWait(getDriver(), MessagePage.getMessagePageLocator());
         return new MessagePage();
     }
 
