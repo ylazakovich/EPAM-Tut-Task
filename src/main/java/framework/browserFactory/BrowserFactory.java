@@ -16,7 +16,7 @@ public class BrowserFactory {
     private static final String FIREFOX = "firefox";
     private static final String IE = "internet explorer";
 
-    private static final String operatingSystemName = System.getProperty("os.name");
+    private static final String OPERATING_SYSTEM_NAME = System.getProperty("os.name");
     private static final String LINUX = "linux";
 
     private static final String PROPERTY_CHROME = "webdriver.chrome.driver";
@@ -27,19 +27,20 @@ public class BrowserFactory {
     private static final String DRIVER_FIREFOX = "geckodriver";
     private static final String DRIVER_IE = "IEDriverServer";
 
-    private BrowserFactory() throws IOException {
-        driverPath = new File(driverPath).getCanonicalPath();
-        initBrowser(browserName);
-        WebDriverManager.openUrl(driver, url);
-    }
+    private static final String URL = PropertyReader.getProperty("url");
+    private static final String BROWSER_NAME = PropertyReader.getProperty("browserName");
 
     private static String driverPath = "src/main/resources/";
 
-    private static BrowserFactory instance;
     private static WebDriver driver;
 
-    private static final String browserName = PropertyReader.getProperty("browserName");
-    private static final String url = PropertyReader.getProperty("url");
+    private static BrowserFactory instance;
+
+    private BrowserFactory() throws IOException {
+        driverPath = new File(driverPath).getCanonicalPath();
+        initBrowser(BROWSER_NAME);
+        WebDriverManager.openUrl(driver, URL);
+    }
 
     public static String getDriverPath() {
         return driverPath;
@@ -64,7 +65,7 @@ public class BrowserFactory {
     }
 
     private void SetPropertyBrowser(String prop, String driverName) {
-        System.setProperty(prop, Paths.get(driverPath, driverName.concat(initOS(operatingSystemName))).toString());
+        System.setProperty(prop, Paths.get(driverPath, driverName.concat(initOS(OPERATING_SYSTEM_NAME))).toString());
     }
 
     public WebDriver getDriver() {
