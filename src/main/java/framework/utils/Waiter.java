@@ -1,4 +1,4 @@
-package framework.browserFactory.utils;
+package framework.utils;
 
 import framework.BaseEntity;
 import framework.PropertyReader;

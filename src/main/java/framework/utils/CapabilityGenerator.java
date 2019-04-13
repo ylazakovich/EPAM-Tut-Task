@@ -1,5 +1,6 @@
-package framework.browserFactory;
+package framework.utils;
 
+import framework.browserFactory.BrowserFactory;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 public class CapabilityGenerator {
 
-    protected static ChromeOptions getChromeCapability() {
+    public static ChromeOptions getChromeCapability() {
         DesiredCapabilities cap = DesiredCapabilities.chrome();
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.default_content_settings.popups", 0);
@@ -24,7 +25,7 @@ public class CapabilityGenerator {
         return options.merge(cap);
     }
 
-    protected static InternetExplorerOptions getIECapability() {
+    public static InternetExplorerOptions getIECapability() {
         DesiredCapabilities cap = DesiredCapabilities.internetExplorer();
         cap.setCapability("nativeEvents", false);
         cap.setCapability("unexpectedAlertBehaviour", "accept");
@@ -37,7 +38,7 @@ public class CapabilityGenerator {
         return options.merge(cap);
     }
 
-    protected static FirefoxOptions getFirefoxCapability() {
+    public static FirefoxOptions getFirefoxCapability() {
         FirefoxProfile prof = new FirefoxProfile();
         prof.setPreference("ignoreProtectedModeSettings", false);
         prof.setPreference("browser.download.folderList", 2);

@@ -1,10 +1,10 @@
 package pages;
 
-import framework.browserFactory.utils.Waiter;
 import framework.dataFactory.User;
 import framework.elements.Button;
 import framework.elements.Input;
 import framework.pageObject.BasePage;
+import framework.utils.Waiter;
 import org.openqa.selenium.By;
 
 public class IndexPage extends BasePage {

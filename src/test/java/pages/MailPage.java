@@ -1,11 +1,11 @@
 package pages;
 
 import framework.PropertyReader;
-import framework.browserFactory.utils.Waiter;
-import framework.browserFactory.utils.WebDriverManager;
 import framework.elements.Label;
 import framework.elements.Title;
 import framework.pageObject.BasePage;
+import framework.utils.Waiter;
+import framework.utils.WebDriverManager;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 

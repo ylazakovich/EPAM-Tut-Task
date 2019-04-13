@@ -1,7 +1,8 @@
 package framework.browserFactory;
 
 import framework.PropertyReader;
-import framework.browserFactory.utils.WebDriverManager;
+import framework.utils.CapabilityGenerator;
+import framework.utils.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;

@@ -1,7 +1,6 @@
-package framework.dataFactory.utils;
+package framework.dataFactory;
 
-import framework.dataFactory.User;
-import framework.dataFactory.utils.sql.SqlManager;
+import framework.utils.SqlManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
