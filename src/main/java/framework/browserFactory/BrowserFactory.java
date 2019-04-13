@@ -19,8 +19,8 @@ public class BrowserFactory extends BaseEntity {
     private static final String PROPERTY_CHROME = "webdriver.chrome.driver";
     private static final String PROPERTY_FIREFOX = "webdriver.gecko.driver";
     private static final String PROPERTY_IE = "webdriver.ie.driver";
-    private static final String DRIVER_CHROME = "chromedriver";
-    private static final String DRIVER_FIREFOX = "geckodriver";
+    private static final String DRIVER_CHROME = "drivers/chromedriver";
+    private static final String DRIVER_FIREFOX = "drivers/geckodriver";
     private static final String DRIVER_IE = "IEDriverServer";
     private static final String CHROME = "chrome";
     private static final String FIREFOX = "firefox";

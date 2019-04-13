@@ -6,11 +6,10 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertyReader {
-    private final InputStream path = this.getClass().getClassLoader().getResourceAsStream("config.properties");
-
+    private static Log log = Log.getInstance();
     private static final Object lock = new Object();
+    private InputStream path = this.getClass().getClassLoader().getResourceAsStream("config.properties");
     private static PropertyReader instance;
-
     private static Properties properties;
 
     public static PropertyReader getInstance() {
@@ -28,9 +27,9 @@ public class PropertyReader {
         try {
             properties.load(path);
         } catch (FileNotFoundException e) {
-            System.err.println("Configuration properties file cannot be found" + path);
+            log.error("loc.err.properties.not.found");
         } catch (IOException e) {
-            System.err.println("Bad canonical path");
+            log.error("loc.err.properties.file.path");
         }
     }
 

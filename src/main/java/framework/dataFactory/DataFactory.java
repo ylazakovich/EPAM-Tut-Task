@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataFactory {
-    private static final String DATA_TYPE = PropertyReader.getProperty("dataProvider");
+    private static final String DATA_PROVIDER = PropertyReader.getProperty("dataProvider");
 
     public static List<User> getUserList() {
         List<User> users = new ArrayList<>();
-        switch (DATA_TYPE.toLowerCase()) {
+        switch (DATA_PROVIDER.toLowerCase()) {
             case "sql":
                 UserListGenerator.getUserListBySQL(users);
                 break;

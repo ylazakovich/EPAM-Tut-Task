@@ -40,7 +40,7 @@ public class UserListGenerator {
         Document document;
         try {
             builder = docFactory.newDocumentBuilder();
-            document = builder.parse(new File(DATA_PATH + "users.xml"));
+            document = builder.parse(new File(DATA_PATH + "datastorage/users.xml"));
             document.getDocumentElement().normalize();
 
             NodeList nList = document.getElementsByTagName("user");
@@ -71,7 +71,7 @@ public class UserListGenerator {
         BufferedReader br;
         String line;
         try {
-            br = new BufferedReader(new FileReader(DATA_PATH + "users.csv"));
+            br = new BufferedReader(new FileReader(DATA_PATH + "datastorage/users.csv"));
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 users.add(new User(data[0], data[1]));

@@ -21,4 +21,9 @@ public class Title extends BaseElement {
         }
         return titleList;
     }
+
+    @Override
+    protected String getElementType() {
+        return getLoc("loc.title");
+    }
 }

@@ -1,6 +1,7 @@
 package framework.elements;
 
 import framework.BaseEntity;
+import framework.Log;
 import framework.browserFactory.BrowserFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,15 +12,19 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.List;
 
 public abstract class BaseElement extends BaseEntity {
-    private final BrowserFactory factory = BrowserFactory.getInstance();
-
+    private WebDriver driver = BrowserFactory.getInstance().getDriver();
     private WebElement element;
-    private By by;
     private Actions actions;
     private Action action;
-    private WebDriver driver = factory.getDriver();
+    private String name;
+    private By by;
 
     public BaseElement(By by) {
+        this.by = by;
+    }
+
+    public BaseElement(String name, By by) {
+        this.name = name;
         this.by = by;
     }
 
@@ -33,14 +38,14 @@ public abstract class BaseElement extends BaseEntity {
 
     public String getElementText(WebElement element) {
         element = getElement(by);
-        if (isEnable()) {
+        if (isDisplayed()) {
             return element.getText();
         } else {
             return "";
         }
     }
 
-    public boolean isEnable() {
+    public boolean isDisplayed() {
         try {
             element = getElement(by);
             return element.isDisplayed();
@@ -54,5 +59,13 @@ public abstract class BaseElement extends BaseEntity {
         actions.moveToElement(getElement(by)).click(getElement(by));
         action = actions.build();
         action.perform();
+    }
+
+    protected abstract String getElementType();
+
+    @Override
+    protected String formatLogMsg(String message) {
+        return String.format("%1$s '%2$s' %3$s %4$s",
+                getElementType(), name, Log.LOG_DELIMITER, message);
     }
 }

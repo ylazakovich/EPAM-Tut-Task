@@ -12,4 +12,8 @@ public class Input extends BaseElement {
         getElement(by).sendKeys(string);
     }
 
+    @Override
+    protected String getElementType() {
+        return getLoc("loc.input");
+    }
 }

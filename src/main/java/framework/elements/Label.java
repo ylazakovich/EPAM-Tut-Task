@@ -21,4 +21,9 @@ public class Label extends BaseElement {
         }
         return labelList;
     }
+
+    @Override
+    protected String getElementType() {
+        return getLoc("loc.label");
+    }
 }

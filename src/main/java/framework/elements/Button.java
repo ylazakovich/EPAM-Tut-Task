@@ -13,4 +13,9 @@ public class Button extends BaseElement {
     public void click() {
         moveToElementAndClick();
     }
+
+    @Override
+    protected String getElementType() {
+        return getLoc("loc.button");
+    }
 }
