@@ -2,6 +2,7 @@ package framework;
 
 import framework.browserFactory.BrowserFactory;
 import framework.utils.SqlManager;
+import framework.utils.Waiter;
 import framework.utils.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -18,19 +19,43 @@ import java.sql.SQLException;
  */
 
 
-public class BaseEntity {
-    private final BrowserFactory factory = BrowserFactory.getInstance();
+public abstract class BaseEntity {
+    protected static Log logger = Log.getInstance();
+    private static int step = 1;
+    protected WebDriver driver = BrowserFactory.getInstance().getDriver();
 
-    private WebDriver driver = factory.getDriver();
-
-    @BeforeClass
-    public void before() {
-        WebDriverManager.maximize(driver);
+    protected static String getLoc(final String key) {
+        return logger.getLoc(key);
     }
 
     @AfterClass
     public void after() throws SQLException {
         WebDriverManager.close(driver);
         SqlManager.downConnect();
+    }
+
+    @BeforeClass
+    public void before() {
+        logger.initStep(step);
+        WebDriverManager.maximize(driver);
+        Waiter.implicitWait(driver);
+    }
+
+    protected abstract String formatLogMsg(String message);
+
+    protected void info(final String message) {
+        logger.info(formatLogMsg(message));
+    }
+
+    protected void warn(final String message) {
+        logger.warn(formatLogMsg(message));
+    }
+
+    protected void error(final String message) {
+        logger.error(formatLogMsg(message));
+    }
+
+    protected void fatal(final String message) {
+        logger.fatal(formatLogMsg(message));
     }
 }

@@ -1,5 +1,7 @@
 package framework.browserFactory;
 
+import framework.BaseEntity;
+import framework.Log;
 import framework.PropertyReader;
 import framework.utils.CapabilityGenerator;
 import framework.utils.WebDriverManager;
@@ -12,28 +14,23 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-public class BrowserFactory {
+public class BrowserFactory extends BaseEntity {
     private static final String OPERATING_SYSTEM_NAME = System.getProperty("os.name");
-    private static final String LINUX = "linux";
-
-    private static final String CHROME = "chrome";
-    private static final String FIREFOX = "firefox";
-    private static final String IE = "internet explorer";
-
     private static final String PROPERTY_CHROME = "webdriver.chrome.driver";
     private static final String PROPERTY_FIREFOX = "webdriver.gecko.driver";
     private static final String PROPERTY_IE = "webdriver.ie.driver";
-
     private static final String DRIVER_CHROME = "chromedriver";
     private static final String DRIVER_FIREFOX = "geckodriver";
     private static final String DRIVER_IE = "IEDriverServer";
-
-    private static final String URL = PropertyReader.getProperty("url");
+    private static final String CHROME = "chrome";
+    private static final String FIREFOX = "firefox";
+    private static final String IE = "internet explorer";
+    private static final String LINUX = "linux";
     private static final String BROWSER_NAME = PropertyReader.getProperty("browserName");
-
+    private static final String URL = PropertyReader.getProperty("url");
     private static BrowserFactory instance;
-    private static WebDriver driver;
     private static String driverPath = "src/main/resources/";
+    private static Log log = Log.getInstance();
 
     private BrowserFactory() throws IOException {
         driverPath = new File(driverPath).getCanonicalPath();
@@ -50,10 +47,8 @@ public class BrowserFactory {
             if (instance == null) {
                 instance = new BrowserFactory();
             }
-        } catch (IllegalStateException e) {
-            System.err.println("The driver executable does not exist at " + driverPath);
         } catch (IOException ex) {
-            System.err.println("Could not open browser");
+            log.error("loc.err.open.browser");
         }
         return instance;
     }
@@ -93,4 +88,8 @@ public class BrowserFactory {
         }
     }
 
+    @Override
+    protected String formatLogMsg(String message) {
+        return message;
+    }
 }
