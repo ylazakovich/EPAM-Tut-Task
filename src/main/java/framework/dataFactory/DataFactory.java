@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataFactory {
-    private static final String DATA_TYPE = PropertyReader.getProperty("dataType");
+    private static final String DATA_TYPE = PropertyReader.getProperty("dataProvider");
 
     public static List<User> getUserList() {
         List<User> users = new ArrayList<>();
