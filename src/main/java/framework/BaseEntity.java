@@ -9,6 +9,14 @@ import org.testng.annotations.BeforeClass;
 
 import java.sql.SQLException;
 
+/**
+ * Class BaseEntity is a parent class for Test class
+ * Entity keep the instance via BrowserFactory.getInstance
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.0 01 Apr 2019
+ */
+
 
 public class BaseEntity {
     private final BrowserFactory factory = BrowserFactory.getInstance();

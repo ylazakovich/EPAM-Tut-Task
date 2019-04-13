@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 public class BrowserFactory {
+    private static final String OPERATING_SYSTEM_NAME = System.getProperty("os.name");
+    private static final String LINUX = "linux";
+
     private static final String CHROME = "chrome";
     private static final String FIREFOX = "firefox";
     private static final String IE = "internet explorer";
-
-    private static final String OPERATING_SYSTEM_NAME = System.getProperty("os.name");
-    private static final String LINUX = "linux";
 
     private static final String PROPERTY_CHROME = "webdriver.chrome.driver";
     private static final String PROPERTY_FIREFOX = "webdriver.gecko.driver";
@@ -30,11 +30,9 @@ public class BrowserFactory {
     private static final String URL = PropertyReader.getProperty("url");
     private static final String BROWSER_NAME = PropertyReader.getProperty("browserName");
 
-    private static String driverPath = "src/main/resources/";
-
-    private static WebDriver driver;
-
     private static BrowserFactory instance;
+    private static WebDriver driver;
+    private static String driverPath = "src/main/resources/";
 
     private BrowserFactory() throws IOException {
         driverPath = new File(driverPath).getCanonicalPath();
