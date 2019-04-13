@@ -1,6 +1,5 @@
-package framework.pageObject;
+package framework;
 
-import framework.Log;
 import framework.browserFactory.BrowserFactory;
 import framework.elements.Button;
 import org.openqa.selenium.By;
@@ -11,15 +10,15 @@ import org.testng.Assert;
 
 
 public abstract class BasePage {
-    private Log log = Log.getInstance();
     private WebDriver driver = BrowserFactory.getInstance().getDriver();
     private Button button;
     private By locator;
+    private Log log = Log.getInstance();
 
     public BasePage(By locator) {
         init(locator);
         Assert.assertEquals(true, isOpen(locator));
-        log.info(log.getLoc("loc.open.page"));
+        log.info(log.getLogLoc("loc.open.page"));
     }
 
     public boolean isOpen(By titleLocator) {

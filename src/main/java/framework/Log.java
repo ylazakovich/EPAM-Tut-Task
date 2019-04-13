@@ -12,7 +12,7 @@ public class Log {
     private static final String SEPARATOR = "\n\r=============TEST END=============\n\r";
     private static final Logger LOG = LogManager.getLogger(Log.class.getName());
     private static int step;
-    private static Log instance;
+    private static Log instance = null;
     private static Locale locale = new Locale("en");
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("localization/" + locale.toString().toLowerCase(), new UTF8Control());
 
@@ -31,7 +31,7 @@ public class Log {
         step = steps;
     }
 
-    public String getLoc(final String key) {
+    public String getLogLoc(final String key) {
         return resourceBundle.getString(key);
     }
 
@@ -44,7 +44,7 @@ public class Log {
     }
 
     public void error(String message) {
-        LOG.error(getLoc(message));
+        LOG.error(getLogLoc(message));
     }
 
     public void fatal(String message) {

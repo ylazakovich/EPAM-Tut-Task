@@ -22,23 +22,24 @@ import java.sql.SQLException;
 public abstract class BaseEntity {
     protected static Log logger = Log.getInstance();
     private static int step = 1;
-    protected WebDriver driver = BrowserFactory.getInstance().getDriver();
+    protected WebDriver driver;
 
     protected static String getLoc(final String key) {
-        return logger.getLoc(key);
+        return logger.getLogLoc(key);
+    }
+
+    @BeforeClass
+    public void before() {
+        logger.initStep(step);
+        driver = BrowserFactory.getInstance().getDriver();
+        WebDriverManager.maximize(driver);
+        Waiter.implicitWait(driver);
     }
 
     @AfterClass
     public void after() throws SQLException {
         WebDriverManager.close(driver);
         SqlManager.downConnect();
-    }
-
-    @BeforeClass
-    public void before() {
-        logger.initStep(step);
-        WebDriverManager.maximize(driver);
-        Waiter.implicitWait(driver);
     }
 
     protected abstract String formatLogMsg(String message);

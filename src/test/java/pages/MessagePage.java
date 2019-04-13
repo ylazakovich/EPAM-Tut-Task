@@ -1,9 +1,9 @@
 package pages;
 
+import framework.BasePage;
 import framework.elements.Button;
 import framework.elements.TextBox;
 import framework.elements.Title;
-import framework.pageObject.BasePage;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 

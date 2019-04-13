@@ -1,8 +1,8 @@
 package pages;
 
+import framework.BasePage;
 import framework.PropertyReader;
 import framework.elements.Button;
-import framework.pageObject.BasePage;
 import framework.utils.Waiter;
 import framework.utils.WebDriverManager;
 import org.openqa.selenium.By;

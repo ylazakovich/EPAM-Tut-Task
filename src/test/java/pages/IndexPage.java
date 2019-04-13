@@ -1,9 +1,9 @@
 package pages;
 
+import framework.BasePage;
 import framework.dataFactory.User;
 import framework.elements.Button;
 import framework.elements.Input;
-import framework.pageObject.BasePage;
 import framework.utils.Waiter;
 import org.openqa.selenium.By;
 

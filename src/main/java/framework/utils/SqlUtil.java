@@ -10,7 +10,7 @@ public class SqlUtil extends SqlManager {
     private static final String DB_URL = PropertyReader.getProperty("db.url");
     private static final String USER = PropertyReader.getProperty("db.login");
     private static final String PASS = PropertyReader.getProperty("db.password");
-    private static Connection connection;
+    private static Connection connection = null;
 
     private static void initPostgreSQLDriver() {
         try {
