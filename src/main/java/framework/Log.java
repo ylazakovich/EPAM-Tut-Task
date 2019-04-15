@@ -24,7 +24,7 @@ public class Log {
     }
 
     public void step(String message) {
-        LOG.info(("\r\n----------------STEP " + (step++) + "  " + message + "----------------\r\n"));
+        LOG.info(("\n\r----------------STEP " + (step++) + "  " + message + "----------------\n\r"));
     }
 
     public void initStep(int steps) {
