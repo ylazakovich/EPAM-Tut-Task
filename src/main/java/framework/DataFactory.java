@@ -1,6 +1,7 @@
-package framework.dataFactory;
+package framework;
 
-import framework.PropertyReader;
+import framework.dataFactory.User;
+import framework.dataFactory.UserListGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

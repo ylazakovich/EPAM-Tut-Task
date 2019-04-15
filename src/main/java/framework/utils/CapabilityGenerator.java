@@ -1,6 +1,6 @@
 package framework.utils;
 
-import framework.browserFactory.BrowserFactory;
+import framework.BrowserFactory;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;

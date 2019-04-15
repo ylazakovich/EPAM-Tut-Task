@@ -1,14 +1,25 @@
+import allure.TestListener;
 import framework.BaseTest;
-import framework.dataFactory.DataFactory;
+import framework.DataFactory;
 import framework.dataFactory.User;
 import framework.mail.JavaMail;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Link;
+import org.testng.annotations.Listeners;
 import pages.IndexPage;
 
 import java.util.List;
 
+@Listeners({TestListener.class})
+@Epic("Regression Tests")
+@Feature("MainTest")
+
 public class MainTest extends BaseTest {
 
     @Override
+    @Link("https://www.tut.by/")
+    @Link(name = "allure", type = "mylink")
     public void run() {
         List<User> users = DataFactory.getUserList();
 
@@ -23,7 +34,7 @@ public class MainTest extends BaseTest {
         JavaMail.send(sender, recipient.getEmail(), subject, message);
 
         page.authorization(sender)
-                .goToEmail().goToSentFolder().assertSentMessage(recipient.getEmail(), subject)
+                .goToEmail().goToSentFolder().verifyMessage(recipient.getEmail(), subject)
                 .goToLoginPage().logOut();
 
         page.authorization(recipient).

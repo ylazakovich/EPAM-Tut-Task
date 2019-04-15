@@ -1,5 +1,6 @@
 package framework.dataFactory;
 
+import framework.Log;
 import framework.utils.SqlManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class UserListGenerator {
     private static final String DATA_PATH = "src/main/resources/";
+    private static Log logger = Log.getInstance();
 
     public static List<User> getUserListBySQL(List<User> users) {
         String field_1 = "email";
@@ -27,7 +29,7 @@ public class UserListGenerator {
                 users.add(new User(SqlManager.getField_1(), SqlManager.getField_2()));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(logger.getLogLoc("loc.err.db.no.rs"));
         }
         return users;
     }
@@ -42,7 +44,6 @@ public class UserListGenerator {
             builder = docFactory.newDocumentBuilder();
             document = builder.parse(new File(DATA_PATH + "datastorage/users.xml"));
             document.getDocumentElement().normalize();
-
             NodeList nList = document.getElementsByTagName("user");
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node node = nList.item(temp);
@@ -55,14 +56,11 @@ public class UserListGenerator {
             }
 
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            logger.error(logger.getLogLoc("loc.err.parse.xml.doc"));
         } catch (SAXException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            logger.error(logger.getLogLoc("loc.err.sax.xml"));
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            logger.error(logger.getLogLoc("loc.err.xml"));
         }
         return users;
     }
@@ -78,9 +76,9 @@ public class UserListGenerator {
             }
             br.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.error(logger.getLogLoc("loc.err.read.csv"));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(logger.getLogLoc("loc.err.csv"));
         }
         return users;
     }

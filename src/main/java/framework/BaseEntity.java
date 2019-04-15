@@ -1,6 +1,5 @@
 package framework;
 
-import framework.browserFactory.BrowserFactory;
 import framework.utils.SqlManager;
 import framework.utils.Waiter;
 import framework.utils.WebDriverManager;
@@ -33,13 +32,18 @@ public abstract class BaseEntity {
         logger.initStep(step);
         driver = BrowserFactory.getInstance().getDriver();
         WebDriverManager.maximize(driver);
-        Waiter.implicitWait(driver);
+        Waiter.fluentWait(driver);
     }
 
     @AfterClass
     public void after() throws SQLException {
         WebDriverManager.close(driver);
         SqlManager.downConnect();
+
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
     protected abstract String formatLogMsg(String message);

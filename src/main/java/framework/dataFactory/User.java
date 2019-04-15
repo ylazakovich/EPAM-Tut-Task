@@ -1,5 +1,7 @@
 package framework.dataFactory;
 
+import framework.DataFactory;
+
 public class User extends DataFactory {
     private String email;
     private String password;

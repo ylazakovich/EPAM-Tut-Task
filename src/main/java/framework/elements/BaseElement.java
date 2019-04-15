@@ -1,28 +1,30 @@
 package framework.elements;
 
 import framework.BaseEntity;
+import framework.BrowserFactory;
 import framework.Log;
-import framework.browserFactory.BrowserFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseElement extends BaseEntity {
     private WebDriver driver = BrowserFactory.getInstance().getDriver();
+    private List<String> labelList;
     private WebElement element;
     private Actions actions;
     private Action action;
     private String name;
     private By by;
 
+
     public BaseElement(By by) {
         this.by = by;
     }
-
     public BaseElement(String name, By by) {
         this.name = name;
         this.by = by;
@@ -32,10 +34,6 @@ public abstract class BaseElement extends BaseEntity {
         return by != null ? driver.findElement(by) : element;
     }
 
-    public List<WebElement> getElements(By by) {
-        return driver.findElements(by);
-    }
-
     public String getElementText(WebElement element) {
         element = getElement(by);
         if (isDisplayed()) {
@@ -43,6 +41,19 @@ public abstract class BaseElement extends BaseEntity {
         } else {
             return "";
         }
+    }
+
+    public List<WebElement> getElements(By by) {
+        return driver.findElements(by);
+    }
+
+    public List<String> getTextElements(By by) {
+        labelList = new ArrayList<>();
+        for (WebElement webElement :
+                getElements(by)) {
+            labelList.add(getElementText(webElement));
+        }
+        return labelList;
     }
 
     public boolean isDisplayed() {

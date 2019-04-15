@@ -1,5 +1,6 @@
 package framework.utils;
 
+import framework.Log;
 import framework.PropertyReader;
 
 import java.sql.Connection;
@@ -10,23 +11,15 @@ public class SqlUtil extends SqlManager {
     private static final String DB_URL = PropertyReader.getProperty("db.url");
     private static final String USER = PropertyReader.getProperty("db.login");
     private static final String PASS = PropertyReader.getProperty("db.password");
+    private static Log log = Log.getInstance();
+
     private static Connection connection = null;
 
     private static void initPostgreSQLDriver() {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
-        }
-        System.out.println("PostgreSQL JDBC Driver successfully connected");
-
-    }
-
-    private static void isConnect() {
-        if (connection != null) {
-            System.out.println("You successfully connected to database now" + "\n");
-        } else {
-            System.out.println("Failed to make connection to database" + "\n");
+            log.error("loc.err.db.con");
         }
     }
 
@@ -34,8 +27,6 @@ public class SqlUtil extends SqlManager {
         initPostgreSQLDriver();
             connection = DriverManager
                     .getConnection(DB_URL, USER, PASS);
-
-        isConnect();
         return connection;
     }
 

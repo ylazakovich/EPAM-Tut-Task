@@ -23,8 +23,8 @@ public class Log {
         return instance;
     }
 
-    public static void step(String message) {
-        LOG.info(("\n\r----------------STEP " + (step++) + "  " + message + "----------------\n\r"));
+    public void step(String message) {
+        LOG.info(("\r\n----------------STEP " + (step++) + "  " + message + "----------------\r\n"));
     }
 
     public void initStep(int steps) {

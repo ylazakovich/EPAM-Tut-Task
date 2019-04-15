@@ -1,8 +1,5 @@
-package framework.browserFactory;
+package framework;
 
-import framework.BaseEntity;
-import framework.Log;
-import framework.PropertyReader;
 import framework.utils.CapabilityGenerator;
 import framework.utils.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -35,6 +32,7 @@ public class BrowserFactory extends BaseEntity {
     private BrowserFactory() throws IOException {
         driverPath = new File(driverPath).getCanonicalPath();
         initBrowser(BROWSER_NAME);
+        log.info(log.getLogLoc("loc.open.browser"));
         WebDriverManager.openUrl(driver, URL);
     }
 

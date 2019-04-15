@@ -1,5 +1,6 @@
 package framework.mail;
 
+import framework.Log;
 import framework.dataFactory.User;
 import org.testng.Assert;
 
@@ -10,9 +11,11 @@ import java.util.Properties;
 
 public class JavaMail {
     private static Properties props = MailUtils.setProp();
+    private static Log logger = Log.getInstance();
     private static Message message;
 
     public static void send(User sender, String toEmail, String subject, String text) {
+        logger.step("send message from " + sender.getEmail() + " to " + toEmail);
         Session session = MailUtils.setSession(props, MailUtils.authenticate(sender));
         try {
             message = new MimeMessage(session);
@@ -35,7 +38,7 @@ public class JavaMail {
 
             store.close();
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            logger.info(logger.getLogLoc("loc.err.msg"));
         }
     }
 
