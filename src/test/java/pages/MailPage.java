@@ -1,6 +1,7 @@
 package pages;
 
 import framework.BasePage;
+import framework.Log;
 import framework.PropertyReader;
 import framework.elements.Label;
 import framework.elements.Title;
@@ -11,6 +12,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 
 public class MailPage extends BasePage {
+    private static Log logger = Log.getInstance();
     private static By mailPageLocator = By.xpath("//div[@class='mail-User-Name']");
     // Menu links of the folders
     private By nestedLocator = By.xpath("//div[@data-key='view=folders']");
@@ -35,6 +37,7 @@ public class MailPage extends BasePage {
 
     @Step("Go to Login Page")
     public LoginPage goToLoginPage() {
+        logger.step("return to login page");
         WebDriverManager.openUrl(getDriver(), PropertyReader.getProperty("url"));
         Waiter.fluentWait(getDriver(), LoginPage.getLoginPageLocator());
         return new LoginPage();
@@ -42,6 +45,7 @@ public class MailPage extends BasePage {
 
     @Step("Go to Sent Folder")
     public MailPage goToSentFolder() {
+        logger.step("go to Sent folder");
         nestedList = new Label(nestedLocator);
         nestedList.getElements(nestedItem).get(1).click();
         Waiter.explicitWait(getDriver(), recipientEmails);
@@ -50,6 +54,7 @@ public class MailPage extends BasePage {
 
     @Step("Go to 1st message of the inbox folder")
     public MessagePage goToFirstMessage() {
+        logger.step("open 1st message in inbox folder");
         Label inboxFolderLabel = new Label(messageInboxFolder);
         inboxFolderLabel.getElements(messageLine).get(0).click();
         Waiter.explicitWait(getDriver(), MessagePage.getMessagePageLocator());
@@ -59,6 +64,7 @@ public class MailPage extends BasePage {
     @Step("Check the recipient and the subject of message\n" +
             "recipient: {0}\n subject of the message: {1}")
     public MailPage verifyMessage(String recipientEmail, String expectedSubject) {
+        logger.step("assert recipient of message and subject of message");
         recipientTitles = new Title(recipientEmails);
         String actualEmail = recipientTitles.getTextElements(recipientEmails).get(0);
         Assert.assertEquals(actualEmail, recipientEmail);
