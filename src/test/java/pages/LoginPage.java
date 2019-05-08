@@ -29,6 +29,7 @@ public class LoginPage extends BasePage {
         loginForm.moveToElementAndClick();
         Waiter.fluentWait(getDriver(), logOutLocator);
         logOutButton.moveToElementAndClick();
+        Waiter.fluentWait(getDriver(), loginPageLocator);
     }
 
     public static By getLoginPageLocator() {
