@@ -1,5 +1,6 @@
 import allure.TestListener;
 import framework.BaseTest;
+import framework.Log;
 import framework.dataFactory.User;
 import framework.mail.JavaMail;
 import io.qameta.allure.Description;
@@ -13,6 +14,7 @@ import pages.IndexPage;
 @Epic("Regression Tests")
 
 public class MainTest extends BaseTest {
+    protected static Log logger = Log.getInstance();
     private User sender = getUsers().get(0);
     private User recipient = getUsers().get(1);
     private String subject = getMessage();
@@ -25,6 +27,7 @@ public class MainTest extends BaseTest {
     @Test
     @Description("1. Sent email (JavaMail)\n" + "2. Checks recipient of message\n" + "3. Checks message")
     public void runTest() {
+        logger.info(getLoc("loc.test.start"));
         JavaMail.send(sender, recipient.getEmail(), subject, message);
 
         page.authorization(sender)
@@ -33,5 +36,6 @@ public class MainTest extends BaseTest {
 
         page.authorization(recipient).
                 goToEmail().goToFirstMessage().assertMessage(sender.getEmail(), message);
+        logger.info(getLoc("loc.test.end"));
     }
 }

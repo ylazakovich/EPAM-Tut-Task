@@ -11,15 +11,6 @@ import org.testng.annotations.BeforeClass;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Class BaseEntity is a parent class for Test class
- * Entity keep the instance via BrowserFactory.getInstance
- *
- * @author Yaroslav Lazakovich
- * @version 1.0 01 Apr 2019
- */
-
-
 public abstract class BaseEntity {
     protected static Log logger = Log.getInstance();
     private static int step = 1;
@@ -44,7 +35,7 @@ public abstract class BaseEntity {
     public void after() throws SQLException {
         WebDriverManager.close(driver);
         SqlManager.downConnect();
-
+        logger.makeSeparator();
     }
 
     public List<User> getUsers() {
