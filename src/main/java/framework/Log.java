@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 public class Log {
     public static final String LOG_DELIMITER = "::";
     private static final String SEPARATOR = "\n\r=============TEST END=============\n\r";
-    private static final Logger LOG = LogManager.getLogger(Log.class.getName());
+    private final static Logger LOG = LogManager.getLogger(Log.class.getName());
     private static int step;
     private static Log instance = null;
     private static Locale locale = new Locale("en");

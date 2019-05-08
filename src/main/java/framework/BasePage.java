@@ -10,9 +10,9 @@ import org.testng.Assert;
 
 public abstract class BasePage {
     private WebDriver driver = BrowserFactory.getInstance().getDriver();
+    private Log log = Log.getInstance();
     private Button button;
     private By locator;
-    private Log log = Log.getInstance();
 
     public BasePage(By locator) {
         init(locator);

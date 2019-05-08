@@ -1,5 +1,6 @@
 package framework;
 
+import framework.dataFactory.User;
 import framework.utils.SqlManager;
 import framework.utils.Waiter;
 import framework.utils.WebDriverManager;
@@ -8,20 +9,15 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.sql.SQLException;
-
-/**
- * Class BaseEntity is a parent class for Test class
- * Entity keep the instance via BrowserFactory.getInstance
- *
- * @author Yaroslav Lazakovich
- * @version 1.0 01 Apr 2019
- */
-
+import java.util.List;
 
 public abstract class BaseEntity {
     protected static Log logger = Log.getInstance();
     private static int step = 1;
     protected WebDriver driver;
+    private List<User> users = DataFactory.getUserList();
+    private String subject = "This is subject";
+    private String message = "SSL: This is text";
 
     protected static String getLoc(final String key) {
         return logger.getLogLoc(key);
@@ -39,7 +35,19 @@ public abstract class BaseEntity {
     public void after() throws SQLException {
         WebDriverManager.close(driver);
         SqlManager.downConnect();
+        logger.makeSeparator();
+    }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public WebDriver getDriver() {
@@ -64,3 +72,7 @@ public abstract class BaseEntity {
         logger.fatal(formatLogMsg(message));
     }
 }
+
+
+
+
