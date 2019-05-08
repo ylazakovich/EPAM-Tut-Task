@@ -21,7 +21,6 @@ public class MailPage extends BasePage {
     // Inbox Folder
     private By messageInboxFolder = By.xpath("//div[contains(@class,'mail-MessagesList')]");
     private By messageLine = By.xpath("//div[@class='mail-MessageSnippet-Content']");
-    private Label inboxFolderLabel;
     // Sent Folder
     private By recipientEmails = By.xpath("//span[@class='mail-MessageSnippet-FromText']");
     private By subjectColumn = By.xpath("//span[contains(@class,'mail') and contains(@class, 'Item_subject')]/span[@title]");
