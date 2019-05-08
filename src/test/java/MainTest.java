@@ -4,7 +4,6 @@ import framework.DataFactory;
 import framework.dataFactory.User;
 import framework.mail.JavaMail;
 import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import io.qameta.allure.Link;
 import org.testng.annotations.Listeners;
 import pages.IndexPage;
@@ -13,7 +12,6 @@ import java.util.List;
 
 @Listeners({TestListener.class})
 @Epic("Regression Tests")
-@Feature("MainTest")
 
 public class MainTest extends BaseTest {
 

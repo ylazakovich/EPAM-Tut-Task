@@ -10,16 +10,16 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class IndexPage extends BasePage {
-    private static By indexPageLocator = By.xpath("//a[@class='enter']");
     private static Log logger = Log.getInstance();
+    private static By indexPageLocator = By.xpath("//a[@class='enter']");
     private By loginFormLocator = By.xpath("//a[contains(@class, 'enter')]");
-    private Button loginForm = new Button(loginFormLocator);
     private By userNameLocator = By.xpath("//div[@class='i-holder']/input[@name='login']");
-    private Input userName = new Input(userNameLocator);
     private By passwordLocator = By.xpath("//div[@class='i-holder']/input[@name='password']");
-    private Input password = new Input(passwordLocator);
     private By submitLocator = By.xpath("//div[@class='b-hold']/input[@type='submit']");
+    private Button loginForm = new Button(loginFormLocator);
     private Button submit = new Button(submitLocator);
+    private Input userName = new Input(userNameLocator);
+    private Input password = new Input(passwordLocator);
 
 
     public IndexPage() {
