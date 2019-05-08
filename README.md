@@ -15,7 +15,7 @@ Manually create 2 e-mail boxes at tut.by
 Use TestNG, Maven, use PageObject pattern. Store Account data in xml, csv and any SQL DB (in all 3 data storages), switch between data storages, Implement data driven approach Tests should provide detailed log, make screenshots on failure and provide results in this format
 
 ## CONSOLE RESULT
-![alt text](src/main/resources/console.png)
+![alt text](console.png)
 
 ## ALLURE RESULT
-![alt text](src/main/resources/allure.png)
+![alt text](allure.png)
