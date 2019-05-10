@@ -1,5 +1,5 @@
 # QATests_UI_API
-
+STATUS ISN'T FINISHED. CuRRENTLY You CAN LOOK AT https://github.com/MrBuslik/IDT-Test-Task
 Tests for tut.by
 
 ## SCENARIO
