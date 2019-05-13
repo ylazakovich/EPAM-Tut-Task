@@ -7,13 +7,8 @@ public class Input extends BaseElement {
         super(by);
     }
 
-    public void sendKeys(By by, String string) {
-        getElement(by).clear();
-        getElement(by).sendKeys(string);
-    }
-
-    @Override
-    protected String getElementType() {
-        return getLoc("loc.input");
+    public void sendKeys(String string) {
+        getElement().clear();
+        getElement().sendKeys(string);
     }
 }

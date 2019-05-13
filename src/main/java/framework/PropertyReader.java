@@ -1,40 +1,54 @@
 package framework;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
-public class PropertyReader {
-    private static Log log = Log.getInstance();
-    private static final Object lock = new Object();
-    private InputStream path = this.getClass().getClassLoader().getResourceAsStream("config.properties");
+/**
+ * Allows read config.properties
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.2
+ */
+public class PropertyReader{
     private static PropertyReader instance;
     private static Properties properties;
+    private static final String propertyFilePath = "src/main/resources/config.properties";
+    private static Log log = Log.getInstance();
 
-    public static PropertyReader getInstance() {
-        if (instance == null) {
-            synchronized (lock) {
-                instance = new PropertyReader();
-                instance.loadData();
-            }
-        }
-        return instance;
-    }
 
-    private void loadData() {
-        properties = new Properties();
+    private PropertyReader() {
+        BufferedReader reader;
         try {
-            properties.load(path);
+            File file = new File(propertyFilePath);
+            reader = new BufferedReader(new FileReader(file.getCanonicalPath()));
+            properties = new Properties();
+            initProperties(reader);
         } catch (FileNotFoundException e) {
             log.error("loc.err.properties.not.found");
+            throw new RuntimeException();
         } catch (IOException e) {
             log.error("loc.err.properties.file.path");
         }
     }
 
-    public static String getProperty(String property) {
-        getInstance();
-        return properties.getProperty(property);
+    private void initProperties(BufferedReader reader) {
+        try {
+            properties.load(reader);
+            reader.close();
+        } catch (IOException e) {
+            log.error("log.err.file.closed");
+        }
+    }
+
+    public static String getProperty(String propertyName) {
+        if (instance == null) {
+            instance = new PropertyReader();
+        }
+        return properties.containsKey(propertyName) ? properties.getProperty(propertyName) : null;
+    }
+
+    public static String getPropertyOrDefault(String propertyName, String defaultValue) {
+        String result = getProperty(propertyName);
+        return (null == result) ? defaultValue : result;
     }
 }

@@ -1,7 +1,7 @@
 package framework.mail;
 
-import framework.Log;
-import framework.dataFactory.User;
+import framework.BaseEntity;
+import framework.User;
 import org.testng.Assert;
 
 import javax.mail.*;
@@ -9,9 +9,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class JavaMail {
+/**
+ * Allows to send message recipient
+ * via Java-API with TO/CC/BCC
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.2
+ */
+public class JavaMail extends BaseEntity{
     private static Properties props = MailUtils.setProp();
-    private static Log logger = Log.getInstance();
     private static Message message;
 
     public static void send(User sender, String toEmail, String subject, String text) {

@@ -7,8 +7,4 @@ public class Label extends BaseElement {
         super(by);
     }
 
-    @Override
-    protected String getElementType() {
-        return getLoc("loc.label");
-    }
 }

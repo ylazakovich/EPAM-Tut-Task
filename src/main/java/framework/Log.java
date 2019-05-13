@@ -7,14 +7,26 @@ import org.apache.logging.log4j.Logger;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class Log {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+/**
+ * Log4j2
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.2
+ */
+public class Log{
     public static final String LOG_DELIMITER = "::";
-    private static final String SEPARATOR = "\n\r=============TEST END=============\n\r";
-    private final static Logger LOG = LogManager.getLogger(Log.class.getName());
-    private static int step;
-    private static Log instance = null;
-    private static Locale locale = new Locale("en");
+    private static final Logger LOG = LogManager.getLogger(Log.class.getName());
+    private static final String SEPARATOR = "\n\r======================TEST END======================\n\r";
+    private static Locale locale = new Locale(PropertyReader.getPropertyOrDefault("locale", "en"));
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("localization/" + locale.toString().toLowerCase(), new UTF8Control());
+    private static Log instance = null;
+    private static int step;
 
     public static synchronized Log getInstance() {
         if (instance == null) {
@@ -24,15 +36,7 @@ public class Log {
     }
 
     public void step(String message) {
-        LOG.info(("\n\r----------------STEP " + (step++) + "  " + message + "----------------\n\r"));
-    }
-
-    public void initStep(int steps) {
-        step = steps;
-    }
-
-    public String getLogLoc(final String key) {
-        return resourceBundle.getString(key);
+        LOG.info(("\n\r----------------STEP " + (++step) + "  " + message + "----------------\n\r"));
     }
 
     public void info(final String message) {
@@ -57,6 +61,10 @@ public class Log {
 
     public void makeSeparator() {
         LOG.info(SEPARATOR);
+    }
+
+    public String getLogLoc(final String key) {
+        return resourceBundle.getString(key);
     }
 
 }

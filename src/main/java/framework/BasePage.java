@@ -1,40 +1,42 @@
 package framework;
 
-import framework.elements.Button;
+import framework.elements.Component;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 
-public abstract class BasePage {
-    private WebDriver driver = BrowserFactory.getInstance().getDriver();
-    private Log log = Log.getInstance();
-    private Button button;
-    private By locator;
+/**
+ * Realizes PageObject pattern
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.2
+ */
 
-    public BasePage(By locator) {
-        init(locator);
-        Assert.assertEquals(true, isOpen(locator));
-        log.info(log.getLogLoc("loc.open.page"));
+public abstract class BasePage extends BaseEntity {
+    private By pageLocator;
+    private String title;
+    private Component component;
+
+    public BasePage(By locator, String tittle) {
+        init(locator, tittle);
+        logger.info(logger.getLogLoc("loc.open.page") + " [" + tittle + "]");
+        Assert.assertTrue(isOpen());
     }
 
-    public boolean isOpen(By titleLocator) {
-        this.button = new Button(titleLocator);
-        return button.isDisplayed();
+    public boolean isOpen() {
+        this.component = new Component(pageLocator);
+        return component.isDisplayed();
     }
 
-    public void init(By pageLocator) {
-        this.locator = pageLocator;
-    }
-
-    public WebDriver getDriver() {
-        return driver;
+    private void init(By locator, String title) {
+        this.pageLocator = locator;
+        this.title = title;
     }
 
     public void escapeFromADB() {
-        WebElement body = getDriver().findElement(By.tagName("body"));
+        WebElement body = driver.findElement(By.tagName("body"));
         body.sendKeys(Keys.SPACE);
     }
 }
