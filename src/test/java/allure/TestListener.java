@@ -1,6 +1,8 @@
 package allure;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import framework.BaseEntity;
+import framework.BrowserFactory;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -40,7 +42,7 @@ public class TestListener extends BaseEntity implements ITestListener {
         System.out.println("I am in onTestFailure method " + getTestMethodName(iTestResult) + " failed");
 
         Object testClass = iTestResult.getInstance();
-        WebDriver driver = ((BaseEntity) testClass).getDriver();
+        WebDriver driver = ((BaseEntity) testClass).driver;
 
         if (driver instanceof WebDriver) {
             System.out.println("Screenshot captured for the test case:" + getTestMethodName(iTestResult));
@@ -70,8 +72,4 @@ public class TestListener extends BaseEntity implements ITestListener {
 
     }
 
-    @Override
-    protected String formatLogMsg(String message) {
-        return getLoc(message);
-    }
 }

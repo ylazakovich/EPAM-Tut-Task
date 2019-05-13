@@ -15,7 +15,7 @@ import pages.IndexPage;
 
 public class MainTest extends BaseTest {
     protected static Log logger = Log.getInstance();
-    private IndexPage page = new IndexPage();
+    private IndexPage page;
 
     @Link("https://www.tut.by/")
     @Link(name = "allure", type = "mylink")
@@ -24,6 +24,8 @@ public class MainTest extends BaseTest {
     @Description("1. Sent email (JavaMail)\n" + "2. Checks recipient of message\n" + "3. Checks message")
     public void runTest() {
         logger.info(logger.getLogLoc("loc.test.start"));
+        page = new IndexPage();
+
         JavaMail.send(sender, recipient.getEmail(), subject, message);
         page.authorization(sender)
                 .goToEmail().goToSentFolder().verifyMessage(recipient.getEmail(), subject)
@@ -31,6 +33,7 @@ public class MainTest extends BaseTest {
 
         page.authorization(recipient).
                 goToEmail().goToFirstMessage().assertMessage(sender.getEmail(), message);
+
         logger.info(logger.getLogLoc("loc.test.end"));
     }
 }

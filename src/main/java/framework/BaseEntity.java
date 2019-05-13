@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeMethod;
  */
 public abstract class BaseEntity {
     protected static WebDriver driver;
+
     protected static Log logger = Log.getInstance();
 
     @BeforeMethod

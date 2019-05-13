@@ -30,6 +30,7 @@ public class BrowserFactory extends BaseEntity {
     private static final String URL = PropertyReader.getProperty("url");
     private static BrowserFactory instance;
     private static Log log = Log.getInstance();
+    private WebDriver driver;
 
     public static BrowserFactory getInstance() {
         if (instance == null) {
@@ -38,13 +39,13 @@ public class BrowserFactory extends BaseEntity {
         return instance;
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
     private BrowserFactory() {
         driver = initBrowser(BROWSER_NAME);
         logger.info(logger.getLogLoc("loc.open.browser"));
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
     private static String initOs() {
