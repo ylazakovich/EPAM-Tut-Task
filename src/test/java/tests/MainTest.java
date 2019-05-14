@@ -14,7 +14,6 @@ import pages.IndexPage;
 @Epic("Regression Tests")
 
 public class MainTest extends BaseTest {
-    protected static Log logger = Log.getInstance();
     private IndexPage page;
 
     @Link("https://www.tut.by/")
