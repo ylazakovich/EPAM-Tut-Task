@@ -1,20 +1,19 @@
 package pages;
 
 import framework.BasePage;
-import framework.Log;
 import framework.PropertyReader;
 import framework.elements.Component;
 import framework.elements.Label;
 import framework.elements.Title;
-import framework.utils.Waiter;
 import framework.utils.WebDriverManager;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
 public class MailPage extends BasePage {
+    //TODO need Composer
     // Menu links of the folders
-    private Label nestedList;
+    private Component linkSent;
     // Inbox Folder
     private Component messageLine;
     // Sent Folder
@@ -34,8 +33,8 @@ public class MailPage extends BasePage {
     @Step("Go to Sent Folder")
     public MailPage goToSentFolder() {
         logger.step("go to Sent folder");
-        nestedList = new Label(By.xpath("//div[@data-key='view=folders']"));
-        nestedList.getElements().get(1).click();
+        linkSent = new Component(By.xpath("//div[@data-key='view=folders']/a[2]"));
+        linkSent.getElement().click();
         return this;
     }
 

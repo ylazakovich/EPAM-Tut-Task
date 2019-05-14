@@ -31,8 +31,8 @@ public class MainTest extends BaseTest {
                 .goToEmail().goToSentFolder().verifyMessage(recipient.getEmail(), subject)
                 .goToLoginPage().logOut();
 
-        page.authorization(recipient).
-                goToEmail().goToFirstMessage().assertMessage(sender.getEmail(), message);
+//        page.authorization(recipient).
+//                goToEmail().goToFirstMessage().assertMessage(sender.getEmail(), message);
 
         logger.info(logger.getLogLoc("loc.test.end"));
     }
