@@ -7,8 +7,4 @@ public class TextBox extends BaseElement {
         super(by);
     }
 
-    @Override
-    protected String getElementType() {
-        return getLoc("loc.textBox");
-    }
 }

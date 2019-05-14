@@ -1,13 +1,20 @@
 package framework.mail;
 
-import framework.dataFactory.User;
+import framework.User;
+import framework.mail.JavaMail;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import java.util.Properties;
 
-public class MailUtils {
+/**
+ * Helps JavaMail to set session with mail.tut.by
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.2
+ */
+public class MailUtils extends JavaMail {
 
     protected static Properties setProp() {
         Properties properties = new Properties();

@@ -16,14 +16,9 @@ public class Title extends BaseElement {
     public List<String> getTextElements(By by) {
         titleList = new ArrayList<>();
         for (WebElement webElement :
-                super.getElements(by)) {
-            titleList.add(getElementText(webElement));
+                super.getElements()) {
+            titleList.add(getElementText());
         }
         return titleList;
-    }
-
-    @Override
-    protected String getElementType() {
-        return getLoc("loc.title");
     }
 }

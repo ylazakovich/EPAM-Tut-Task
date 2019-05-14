@@ -3,6 +3,7 @@ package framework.elements;
 import framework.BaseEntity;
 import framework.BrowserFactory;
 import framework.Log;
+import framework.utils.Waiter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,30 +13,33 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Has basic features for webElements
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.0
+ */
 public abstract class BaseElement extends BaseEntity {
-    private WebDriver driver = BrowserFactory.getInstance().getDriver();
-    private List<String> labelList;
     private WebElement element;
-    private Actions actions;
-    private Action action;
     private String name;
     private By by;
-
 
     public BaseElement(By by) {
         this.by = by;
     }
+
     public BaseElement(String name, By by) {
         this.name = name;
         this.by = by;
     }
 
-    public WebElement getElement(By by) {
+    public WebElement getElement() {
+        waitForIsElementPresent();
         return by != null ? driver.findElement(by) : element;
     }
 
-    public String getElementText(WebElement element) {
-        element = getElement(by);
+    public String getElementText() {
+        element = getElement();
         if (isDisplayed()) {
             return element.getText();
         } else {
@@ -43,22 +47,24 @@ public abstract class BaseElement extends BaseEntity {
         }
     }
 
-    public List<WebElement> getElements(By by) {
+    public List<WebElement> getElements() {
+        waitForIsElementPresent();
         return driver.findElements(by);
     }
 
-    public List<String> getTextElements(By by) {
-        labelList = new ArrayList<>();
+    public List<String> getTextElements() {
+        waitForIsElementPresent();
+        List<String> text = new ArrayList<>();
         for (WebElement webElement :
-                getElements(by)) {
-            labelList.add(getElementText(webElement));
+                getElements()) {
+            text.add(webElement.getText());
         }
-        return labelList;
+        return text;
     }
 
     public boolean isDisplayed() {
         try {
-            element = getElement(by);
+            element = getElement();
             return element.isDisplayed();
         } catch (Exception e) {
             return false;
@@ -66,17 +72,19 @@ public abstract class BaseElement extends BaseEntity {
     }
 
     public void moveToElementAndClick() {
-        actions = new Actions(driver);
-        actions.moveToElement(getElement(by)).click(getElement(by));
-        action = actions.build();
-        action.perform();
+        Actions actions = new Actions(driver);
+        actions
+                .moveToElement(getElement())
+                .click(getElement())
+                .build()
+                .perform();
     }
 
-    protected abstract String getElementType();
+    public void click() {
+        getElement().click();
+    }
 
-    @Override
-    protected String formatLogMsg(String message) {
-        return String.format("%1$s '%2$s' %3$s %4$s",
-                getElementType(), name, Log.LOG_DELIMITER, message);
+    private void waitForIsElementPresent() {
+        Waiter.presenceOfElementLocated(by);
     }
 }

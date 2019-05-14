@@ -1,11 +1,16 @@
 package framework;
 
-import framework.dataFactory.User;
-import framework.dataFactory.UserListGenerator;
+import framework.utils.UserListGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Allow to read follow type data: SQL, XML, CSV
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.2
+ */
 public class DataFactory {
     private static final String DATA_PROVIDER = PropertyReader.getProperty("dataProvider");
 

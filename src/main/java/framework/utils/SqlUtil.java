@@ -7,6 +7,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Helps SqlManager to init PostgreSQLDriver
+ * and set connect to database
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.2
+ */
 public class SqlUtil extends SqlManager {
     private static final String DB_URL = PropertyReader.getProperty("db.url");
     private static final String USER = PropertyReader.getProperty("db.login");

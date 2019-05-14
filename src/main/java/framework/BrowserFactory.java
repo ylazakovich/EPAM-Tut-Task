@@ -1,93 +1,77 @@
 package framework;
 
 import framework.utils.CapabilityGenerator;
-import framework.utils.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 
+/**
+ * Compares OS (Linux or Windows) and choose driver (current chrome)
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.2
+ */
 public class BrowserFactory extends BaseEntity {
     private static final String OPERATING_SYSTEM_NAME = System.getProperty("os.name");
     private static final String PROPERTY_CHROME = "webdriver.chrome.driver";
     private static final String PROPERTY_FIREFOX = "webdriver.gecko.driver";
     private static final String PROPERTY_IE = "webdriver.ie.driver";
-    private static final String DRIVER_CHROME = "drivers/chromedriver";
     private static final String DRIVER_FIREFOX = "drivers/geckodriver";
-    private static final String DRIVER_IE = "IEDriverServer";
-    private static final String CHROME = "chrome";
+    private static final String DRIVER_CHROME = "drivers/chromedriver";
+    private static final String DRIVER_IE = "drivers/IEDriverServer";
     private static final String FIREFOX = "firefox";
+    private static final String CHROME = "chrome";
     private static final String IE = "internet explorer";
     private static final String LINUX = "linux";
     private static final String BROWSER_NAME = PropertyReader.getProperty("browserName");
+    private static final String DRIVER_PATH = "src/main/resources/";
     private static final String URL = PropertyReader.getProperty("url");
     private static BrowserFactory instance;
-    private static String driverPath = "src/main/resources/";
     private static Log log = Log.getInstance();
-
-    private BrowserFactory() throws IOException {
-        driverPath = new File(driverPath).getCanonicalPath();
-        initBrowser(BROWSER_NAME);
-        log.info(log.getLogLoc("loc.open.browser"));
-        WebDriverManager.openUrl(driver, URL);
-    }
-
-    public static String getDriverPath() {
-        return driverPath;
-    }
+    private WebDriver driver;
 
     public static BrowserFactory getInstance() {
-        try {
-            if (instance == null) {
-                instance = new BrowserFactory();
-            }
-        } catch (IOException ex) {
-            log.error("loc.err.open.browser");
+        if (instance == null) {
+            instance = new BrowserFactory();
         }
         return instance;
     }
 
-    private static String initOS(String operatingSystemName) {
-        System.out.println("Current Operating System: " + System.getProperties().getProperty("os.name"));
-        return operatingSystemName.toLowerCase().equals(LINUX) ? "" : ".exe";
-    }
-
-    private void SetPropertyBrowser(String prop, String driverName) {
-        System.setProperty(prop, Paths.get(driverPath, driverName.concat(initOS(OPERATING_SYSTEM_NAME))).toString());
+    private BrowserFactory() {
+        driver = initBrowser(BROWSER_NAME);
+        logger.info(logger.getLogLoc("loc.open.browser"));
     }
 
     public WebDriver getDriver() {
         return driver;
     }
 
-    private void initBrowser(String browserName) {
-        System.out.println("Current Browser Selection: " + browserName);
+    private static String initOs() {
+        System.out.println("Current OS: " + System.getProperties().getProperty("os.name"));
+        return OPERATING_SYSTEM_NAME.toLowerCase().equals(LINUX) ? "" : ".exe";
+    }
+
+    private void setPropertyBrowser(String prop, String driverName) {
+        System.setProperty(prop, Paths.get(DRIVER_PATH, driverName.concat(initOs())).toString());
+    }
+
+    private WebDriver initBrowser(String browserName) {
+        System.out.println("Current Browser: " + browserName);
         switch (browserName.toLowerCase()) {
             case CHROME:
-                SetPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
+                setPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
                 driver = new ChromeDriver(CapabilityGenerator.getChromeCapability());
                 break;
             case FIREFOX:
-                SetPropertyBrowser(PROPERTY_FIREFOX, DRIVER_FIREFOX);
+                setPropertyBrowser(PROPERTY_FIREFOX, DRIVER_FIREFOX);
                 driver = new FirefoxDriver(CapabilityGenerator.getFirefoxCapability());
                 break;
-            case IE:
-                SetPropertyBrowser(PROPERTY_IE, DRIVER_IE);
-                driver = new InternetExplorerDriver(CapabilityGenerator.getIECapability());
-                break;
             default:
-                SetPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
-                driver = new ChromeDriver(CapabilityGenerator.getChromeCapability());
-
+                setPropertyBrowser(PROPERTY_CHROME, DRIVER_CHROME);
+                driver = new ChromeDriver();
         }
-    }
-
-    @Override
-    protected String formatLogMsg(String message) {
-        return message;
+        return driver;
     }
 }

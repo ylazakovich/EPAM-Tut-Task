@@ -10,6 +10,12 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+/**
+ * Helps log4j2 to read en.properties
+ *
+ * @author Yaroslav Lazakovich
+ * @version 1.2
+ */
 public class UTF8Control extends ResourceBundle.Control {
     private final String SUFFIX = "properties";
 
