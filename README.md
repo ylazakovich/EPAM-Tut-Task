@@ -1,7 +1,7 @@
 # QATests_UI_API
-Status is *BACKLOG*. May be it will be rework later.
+Status is **BACKLOG**. May be it will be rework later.
 
-Here example of *Smoke test* by using *.NET* for Dev.by
+Here example of **Smoke test** by using **.NET** for Dev.by
 https://github.com/MrBuslik/IDT-Test-Task
 
 ## SCENARIO
