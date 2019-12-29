@@ -1,6 +1,8 @@
 # QATests_UI_API
-STATUS ISN'T FINISHED. CuRRENTLY You CAN LOOK AT https://github.com/MrBuslik/IDT-Test-Task
-Tests for tut.by
+Status is *BACKLOG*. May be it will be rework later.
+
+Here example of *Smoke test* by using *.NET* for Dev.by
+https://github.com/MrBuslik/IDT-Test-Task
 
 ## SCENARIO
 
